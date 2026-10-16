@@ -10,9 +10,9 @@ const poly = (f: (i: number) => number) => data.map((_, i) => pt(i, f(i)).join('
 const rings = [0.25, 0.5, 0.75, 1];
 const anchor = (x: number) => (x < C - 5 ? 'end' : x > C + 5 ? 'start' : 'middle');
 ---
-<svg viewBox="0 0 300 300" class="mx-auto w-full max-w-md" role="img" aria-label={'Coding skills: ' + data.map((d) => `${d.label} ${d.value}%`).join(', ')}>
-  {rings.map((k) => <polygon points={poly(() => R * k)} fill="none" stroke="rgba(255,255,255,0.15)" />)}
-  {data.map((_, i) => <line x1={C} y1={C} x2={pt(i, R)[0]} y2={pt(i, R)[1]} stroke="rgba(255,255,255,0.15)" />)}
+<svg viewBox="0 0 300 300" class="mx-auto w-full max-w-md text-slate-100" role="img" aria-label={'Coding skills: ' + data.map((d) => `${d.label} ${d.value}%`).join(', ')}>
+  {rings.map((k) => <polygon points={poly(() => R * k)} fill="none" stroke="currentColor" stroke-opacity="0.18" />)}
+  {data.map((_, i) => <line x1={C} y1={C} x2={pt(i, R)[0]} y2={pt(i, R)[1]} stroke="currentColor" stroke-opacity="0.18" />)}
   <polygon points={poly((i) => (R * data[i].value) / 100)} fill="#6fd1c8" fill-opacity="0.3" stroke="#556cd6" stroke-width="2.5" stroke-linejoin="round" />
   {data.map((d, i) => {
     const [px, py] = pt(i, (R * d.value) / 100);
@@ -20,7 +20,7 @@ const anchor = (x: number) => (x < C - 5 ? 'end' : x > C + 5 ? 'start' : 'middle
     return (
       <>
         <circle cx={px} cy={py} r="3.5" fill="#6fd1c8" />
-        <text x={lx} y={ly} fill="white" font-size="10.5" font-weight="600" text-anchor={anchor(lx)} dominant-baseline="central">{d.label}</text>
+        <text x={lx} y={ly} fill="currentColor" font-size="10.5" font-weight="600" text-anchor={anchor(lx)} dominant-baseline="central">{d.label}</text>
       </>
     );
   })}

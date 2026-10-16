@@ -7,7 +7,7 @@ import type { Project } from '../../data/types';
 const list = projects as Project[];
 ---
 <Layout title="Projects in detail" description="All projects made by Maxime Clément revolving around the Internet of Things (IoT), in detail." keywords="Full-stack, frontend, backend, hardware, firmware, deployment" background="/images/projects/background.jpg">
-  <PageTitle title="Projects in detail" />
+  <PageTitle eyebrow="Portfolio" title="Projects in detail" />
   <div class="mx-auto flex max-w-3xl flex-col gap-8">
     {list.map((p, i) => <ProjectDetail project={p} id={i} link />)}
   </div>

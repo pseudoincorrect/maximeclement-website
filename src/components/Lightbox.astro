@@ -1,0 +1,14 @@
+---
+import X from '@lucide/astro/icons/x';
+import ChevronLeft from '@lucide/astro/icons/chevron-left';
+import ChevronRight from '@lucide/astro/icons/chevron-right';
+---
+<dialog id="lightbox" class="m-0 size-full max-h-none max-w-none bg-[#05070f]/90 p-0 backdrop:bg-[#05070f]/80" aria-label="Image viewer" transition:persist>
+  <div class="flex size-full flex-col items-center justify-center gap-3 p-4">
+    <img id="lightbox-img" alt="" class="max-h-[82vh] max-w-full rounded-lg object-contain" />
+    <p id="lightbox-caption" class="text-sm text-[#e2e8f0]"></p>
+  </div>
+  <button data-lb-close type="button" aria-label="Close" class="absolute right-4 top-4 rounded-full bg-[#fff]/10 p-2.5 text-[#fff] hover:bg-[#fff]/25"><X class="size-6" /></button>
+  <button data-lb-prev type="button" aria-label="Previous image" class="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-[#fff]/10 p-3 text-[#fff] hover:bg-[#fff]/25"><ChevronLeft class="size-6" /></button>
+  <button data-lb-next type="button" aria-label="Next image" class="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-[#fff]/10 p-3 text-[#fff] hover:bg-[#fff]/25"><ChevronRight class="size-6" /></button>
+</dialog>

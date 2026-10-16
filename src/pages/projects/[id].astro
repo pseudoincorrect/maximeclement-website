@@ -1,27 +1,56 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ProjectDetail from '../../components/ProjectDetail.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
 import ArrowLeft from '@lucide/astro/icons/arrow-left';
 import ArrowRight from '@lucide/astro/icons/arrow-right';
 import projects from '../../data/projects.json';
+import { relatedProjects } from '../../data/categories';
 import type { Project } from '../../data/types';
 
 export function getStaticPaths() {
   const list = projects as Project[];
-  return list.map((project, i) => ({ params: { id: String(i) }, props: { project, i, total: list.length } }));
+  return list.map((project, i) => ({ params: { id: String(i) }, props: { project, i } }));
 }
-const { project, i, total } = Astro.props;
-const prev = i > 0 ? i - 1 : null;
-const next = i < total - 1 ? i + 1 : null;
+const { project, i } = Astro.props;
 const list = projects as Project[];
+const prev = i > 0 ? i - 1 : null;
+const next = i < list.length - 1 ? i + 1 : null;
+const related = relatedProjects(list, i);
+const toc = [
+  { href: `#project-${i}`, label: 'Gallery' },
+  { href: `#overview-${i}`, label: 'Overview' },
+  { href: `#details-${i}`, label: 'Details' },
+  ...(related.length ? [{ href: '#related', label: 'Related projects' }] : []),
+];
 ---
 <Layout title={project.title} description={project.shortSummary} keywords={project.tags.join(', ')} background="/images/projects/background.jpg" image={project.mainPictures[0].path}>
-  <div class="mx-auto flex max-w-3xl flex-col gap-6">
-    <a href="/projects/" class="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-secondary"><ArrowLeft class="size-4" /> All projects</a>
-    <ProjectDetail project={project} id={i} />
-    <nav class="flex justify-between gap-4 text-sm" aria-label="Project navigation">
-      {prev !== null ? <a href={`/projects/${prev}/`} class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-bg-paper/60 px-4 py-3 transition hover:border-secondary/60"><ArrowLeft class="size-4" />{list[prev].title}</a> : <span />}
-      {next !== null ? <a href={`/projects/${next}/`} class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-bg-paper/60 px-4 py-3 transition hover:border-secondary/60">{list[next].title}<ArrowRight class="size-4" /></a> : <span />}
-    </nav>
+  <div class="mx-auto flex max-w-5xl gap-10">
+    <div class="flex min-w-0 flex-1 flex-col gap-6">
+      <a href="/projects/" class="inline-flex w-fit items-center gap-2 text-sm text-slate-300 hover:text-secondary"><ArrowLeft class="size-4" /> All projects</a>
+      <ProjectDetail project={project} id={i} />
+      <nav class="flex justify-between gap-4 text-sm" aria-label="Project navigation">
+        {prev !== null ? <a href={`/projects/${prev}/`} class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-bg-paper/60 px-4 py-3 transition hover:border-secondary/60"><ArrowLeft class="size-4" />{list[prev].title}</a> : <span />}
+        {next !== null ? <a href={`/projects/${next}/`} class="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-bg-paper/60 px-4 py-3 transition hover:border-secondary/60">{list[next].title}<ArrowRight class="size-4" /></a> : <span />}
+      </nav>
+      {related.length > 0 && (
+        <section id="related" class="mt-6 scroll-mt-24">
+          <h2 class="mb-5 text-2xl font-bold">Related projects</h2>
+          <div class="grid gap-5 sm:grid-cols-3">
+            {related.map((r, k) => <ProjectCard project={r.p} id={r.i} delay={k * 70} />)}
+          </div>
+        </section>
+      )}
+    </div>
+    <aside class="hidden w-44 shrink-0 xl:block">
+      <nav data-toc class="sticky top-24 text-sm" aria-label="On this page">
+        <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">On this page</p>
+        <ul class="space-y-1 border-l border-white/10">
+          {toc.map((t) => (
+            <li><a href={t.href} class="-ml-px block border-l-2 border-transparent py-1.5 pl-4 text-slate-400 transition hover:text-secondary aria-[current=true]:border-secondary aria-[current=true]:font-semibold aria-[current=true]:text-secondary">{t.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
   </div>
 </Layout>

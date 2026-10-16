@@ -3,7 +3,22 @@ import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import Hl from '../components/Hl.astro';
 import ArrowRight from '@lucide/astro/icons/arrow-right';
+import Cpu from '@lucide/astro/icons/cpu';
+import Terminal from '@lucide/astro/icons/terminal';
+import Wifi from '@lucide/astro/icons/wifi';
+import Server from '@lucide/astro/icons/server';
+import Smartphone from '@lucide/astro/icons/smartphone';
+import projects from '../data/projects.json';
+import { SITE } from '../data/site';
 
+const years = new Date().getFullYear() - 2014;
+const stats = [
+  { value: `${years}+`, label: 'Years in IoT' },
+  { value: String(projects.length), label: 'Projects documented' },
+  { value: '3', label: 'Disciplines: cloud, firmware, hardware' },
+  { value: '3', label: 'Countries: France, Sweden & Qatar' },
+];
+const langs = ['Go', 'TypeScript', 'C', 'Python', 'Dart', 'AWS'];
 const examples = [
   'Connected machinery in factories',
   'Smart city lighting',
@@ -23,31 +38,86 @@ const stack = [
   ['Bash', 'when shell scripts are needed'],
   ['Altium (or Eagle)', 'for Printed Circuit Board design'],
 ];
-const chain = ['Electronic device(s)', 'Firmware', 'Internet connection', 'Backend', 'Website or mobile app'];
+const chain = [
+  { icon: Cpu, name: 'Device', desc: 'Sensors & electronics' },
+  { icon: Terminal, name: 'Firmware', desc: 'Embedded software' },
+  { icon: Wifi, name: 'Connectivity', desc: 'Wi-Fi, BLE, LoRaWAN' },
+  { icon: Server, name: 'Backend', desc: 'Cloud services' },
+  { icon: Smartphone, name: 'Web & mobile', desc: 'Apps & dashboards' },
+];
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: SITE.name,
+  jobTitle: 'IoT Engineer',
+  url: SITE.url,
+  sameAs: Object.values(SITE.socials),
+};
 ---
-<Layout keywords="Portfolio, Home, Full-stack, Backend, Frontend, IoT">
-  <div class="mx-auto flex max-w-4xl flex-col items-center gap-10">
+<Layout keywords="Portfolio, Home, Full-stack, Backend, Frontend, IoT" jsonLd={jsonLd}>
+  <div class="mx-auto flex max-w-5xl flex-col gap-16">
     <!-- Hero -->
-    <section class="flex flex-col items-center text-center">
-      <p class="mb-8 rounded-full border border-primary/50 bg-primary/10 px-5 py-2 text-sm font-medium text-slate-200 backdrop-blur">
-        Need <b class="text-secondary">IoT</b> in your projects? I can help with that.
-      </p>
-      <div class="animate-pulse-glow rounded-full p-1.5 ring-2 ring-secondary/60">
-        <img src="/images/home/max_pict.jpg" alt="Maxime Clément, IoT Engineer" width="288" height="288"
-          class="size-52 rounded-full object-cover sm:size-72" fetchpriority="high" />
+    <section class="grid items-center gap-10 pt-4 lg:grid-cols-[1.25fr_1fr]">
+      <div class="order-2 text-center lg:order-1 lg:text-left">
+        <p class="animate-fade-up mb-5 inline-flex items-center gap-2 rounded-full border border-secondary/40 bg-secondary/10 px-4 py-1.5 text-sm font-medium text-secondary">
+          <span class="size-2 animate-pulse rounded-full bg-secondary"></span> Bonjour ! Maxime here, IoT Engineer
+        </p>
+        <h1 class="animate-fade-up text-4xl font-bold leading-[1.1] tracking-tight [animation-delay:80ms] sm:text-5xl xl:text-6xl">
+          I connect <span class="bg-gradient-to-r from-primary-light to-secondary bg-clip-text text-transparent">physical devices</span> to the cloud, at scale.
+        </h1>
+        <p class="animate-fade-up mx-auto mt-6 max-w-xl text-lg text-slate-300 [animation-delay:160ms] lg:mx-0">
+          Need <b class="text-secondary">IoT</b> in your projects? From PCB and firmware to backend and apps, I build the whole chain.
+        </p>
+        <div class="animate-fade-up mt-8 flex flex-wrap justify-center gap-4 [animation-delay:240ms] lg:justify-start">
+          <a href="/projects/" data-magnetic class="group inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-on-primary shadow-lg shadow-primary/30 hover:bg-primary-light">
+            See my projects <ArrowRight class="size-5 transition group-hover:translate-x-1" />
+          </a>
+          <a href="/contact/" data-magnetic class="inline-flex items-center rounded-xl border border-secondary/60 px-6 py-3 font-semibold text-secondary hover:bg-secondary/10">Get in touch</a>
+        </div>
+        <ul class="mt-8 flex flex-wrap justify-center gap-2 lg:justify-start" aria-label="Main technologies">
+          {langs.map((l) => <li class="rounded-full bg-white/5 px-3 py-1 text-xs font-medium text-slate-300 ring-1 ring-white/10">{l}</li>)}
+        </ul>
       </div>
-      <h1 class="animate-pop mt-8 text-5xl font-extrabold tracking-tight sm:text-6xl">Bonjour !</h1>
-      <p class="mt-4 text-xl text-slate-200 sm:text-2xl">Maxime here, <span class="text-secondary">IoT Engineer</span> (Internet of Things)</p>
-      <div class="mt-8 flex flex-wrap justify-center gap-4">
-        <a href="/projects/" class="group inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-white shadow-lg shadow-primary/30 transition hover:bg-primary-light">
-          See my projects <ArrowRight class="size-5 transition group-hover:translate-x-1" />
-        </a>
-        <a href="/contact/" class="inline-flex items-center rounded-xl border border-secondary/60 px-6 py-3 font-semibold text-secondary transition hover:bg-secondary/10">Get in touch</a>
+      <div class="order-1 flex justify-center lg:order-2">
+        <div class="animate-floaty relative">
+          <div class="absolute -inset-6 rounded-full bg-gradient-to-tr from-primary/40 to-secondary/30 blur-3xl" aria-hidden="true"></div>
+          <img src="/images/home/max_pict.jpg" alt="Maxime Clément, IoT Engineer" width="320" height="320" fetchpriority="high"
+            class="animate-pulse-glow relative size-56 rounded-full object-cover ring-2 ring-secondary/60 sm:size-72 lg:size-80" />
+        </div>
       </div>
     </section>
 
+    <!-- Stats -->
+    <section aria-label="Key figures" class="grid grid-cols-2 gap-4 md:grid-cols-4">
+      {stats.map((s, i) => (
+        <Card tone="neutral" delay={i * 80} class="p-5 text-center">
+          <p class="bg-gradient-to-r from-primary-light to-secondary bg-clip-text font-display text-4xl font-bold text-transparent">{s.value}</p>
+          <p class="mt-1 text-xs text-slate-400">{s.label}</p>
+        </Card>
+      ))}
+    </section>
+
+    <!-- System chain -->
+    <section aria-labelledby="chain-title">
+      <h2 id="chain-title" class="mb-2 text-center text-3xl font-bold">A typical IoT application</h2>
+      <p class="mx-auto mb-10 max-w-xl text-center text-slate-300">Five layers, one engineer who understands each of them.</p>
+      <ol class="relative grid gap-4 md:grid-cols-5">
+        <div class="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-primary/50 to-secondary/50 md:hidden" aria-hidden="true"></div>
+        <div class="absolute left-[10%] right-[10%] top-9 hidden h-px bg-gradient-to-r from-primary via-secondary to-primary md:block" aria-hidden="true"></div>
+        {chain.map((c, i) => (
+          <li data-reveal style={`--reveal-delay:${i * 90}ms`} class="relative flex items-center gap-4 md:flex-col md:text-center">
+            <span class="relative z-10 flex size-[4.5rem] shrink-0 items-center justify-center rounded-2xl border border-secondary/40 bg-bg-paper text-secondary shadow-lg shadow-secondary/10">
+              <c.icon class="size-8" />
+              <span class="absolute -right-2 -top-2 flex size-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-on-primary">{i + 1}</span>
+            </span>
+            <span><span class="block font-display font-bold">{c.name}</span><span class="text-sm text-slate-400">{c.desc}</span></span>
+          </li>
+        ))}
+      </ol>
+    </section>
+
     <!-- What is IoT -->
-    <Card tone="secondary" class="w-full p-6 sm:p-8">
+    <Card tone="secondary" class="p-6 sm:p-8">
       <h2 class="mb-4 text-2xl font-bold">What is <span class="text-secondary">IoT</span>?</h2>
       <blockquote class="border-l-4 border-secondary/60 pl-4 italic text-slate-300">
         The Internet of Things (IoT) is the extension of Internet connectivity into physical devices. Embedded with electronics, Internet connectivity, and other forms of hardware (such as sensors), these devices can communicate and interact with others over the Internet, and they can be remotely monitored and controlled.
@@ -55,7 +125,7 @@ const chain = ['Electronic device(s)', 'Firmware', 'Internet connection', 'Backe
       </blockquote>
       <p class="mt-5 text-lg font-semibold text-secondary">IoT represents the technologies behind [electronic] devices connected to the internet.</p>
       <div class="mt-6 grid items-center gap-6 sm:grid-cols-2">
-        <img src="/images/home/echo_dot.jpg" alt="An IoT device" loading="lazy" width="192" height="192" class="mx-auto size-48 rounded-full object-cover ring-2 ring-white/10" />
+        <img src="/images/home/echo_dot.jpg" alt="An IoT device" loading="lazy" decoding="async" width="192" height="192" class="mx-auto size-48 rounded-full object-cover ring-2 ring-white/10" />
         <div>
           <p class="mb-2 text-slate-300">A few examples:</p>
           <ul class="space-y-1.5 text-slate-300">
@@ -66,29 +136,17 @@ const chain = ['Electronic device(s)', 'Firmware', 'Internet connection', 'Backe
     </Card>
 
     <!-- What I do -->
-    <Card tone="primary" class="w-full p-6 sm:p-8">
+    <Card tone="primary" class="p-6 sm:p-8">
       <h2 class="mb-4 text-2xl font-bold">What I do</h2>
       <p class="text-slate-300">
-        I have been working in this domain, mixing <Hl>web technologies</Hl>, <Hl>software</Hl> and <Hl>hardware</Hl> since 2014.
+        I have been working in this domain since 2014, mixing <Hl>web technologies</Hl>, <Hl>software</Hl> and <Hl>hardware</Hl>.
         Most of my projects combine <Hl>cloud applications</Hl> and <Hl>physical devices</Hl> to create a novel solution to the problem at hand.
       </p>
-      <div class="mt-6 grid items-center gap-6 sm:grid-cols-2">
-        <img src="/images/home/iot_diagram.jpg" alt="IoT system diagram" loading="lazy" width="500" height="325" class="w-full rounded-xl object-cover ring-1 ring-white/10" />
-        <div>
-          <p class="mb-3 text-slate-300">A typical application involves:</p>
-          <ol class="space-y-2">
-            {chain.map((c, i) => (
-              <li class="flex items-center gap-3 text-slate-200">
-                <span class="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/30 text-sm font-bold text-secondary ring-1 ring-primary/60">{i + 1}</span>{c}
-              </li>
-            ))}
-          </ol>
-        </div>
-      </div>
+      <img src="/images/home/iot_diagram.jpg" alt="IoT system diagram" loading="lazy" decoding="async" width="900" height="400" class="mt-6 max-h-80 w-full rounded-xl object-cover ring-1 ring-white/10" />
     </Card>
 
     <!-- Tools -->
-    <Card tone="secondary" class="w-full p-6 sm:p-8">
+    <Card tone="secondary" class="p-6 sm:p-8">
       <h2 class="mb-4 text-2xl font-bold">Tools of the trade</h2>
       <p class="text-slate-300">A large variety of tools and programming languages are involved in this process. I try as much as I can to <Hl>pick the most appropriate tool for the job</Hl>.</p>
       <div class="mt-6 grid items-start gap-6 md:grid-cols-3">
@@ -97,15 +155,16 @@ const chain = ['Electronic device(s)', 'Firmware', 'Internet connection', 'Backe
             <li class="flex gap-2 text-slate-300"><span class="mt-2 size-1.5 shrink-0 rounded-full bg-secondary"></span><span><Hl>{name}</Hl> {desc}</span></li>
           ))}
         </ul>
-        <img src="/images/home/programming_languages.jpg" alt="Programming languages" loading="lazy" width="320" height="208" class="w-full rounded-xl object-cover ring-1 ring-white/10" />
+        <img src="/images/home/programming_languages.jpg" alt="Programming languages" loading="lazy" decoding="async" width="320" height="208" class="w-full rounded-xl object-cover ring-1 ring-white/10" />
       </div>
-      <p class="mt-6 text-slate-300">A long list of frameworks, SDKs, vendor IPs and hardware are used along the way. More information in the <a class="font-semibold text-secondary underline underline-offset-4 hover:text-secondary-light" href="/skills/">Skills</a> section. The <a class="font-semibold text-secondary underline underline-offset-4 hover:text-secondary-light" href="/projects/">Projects</a> page gives a deeper overview of the kind of work I usually do.</p>
+      <p class="mt-6 text-slate-300">A long list of frameworks, SDKs, vendor IPs and hardware is used along the way. More information in the <a class="font-semibold text-secondary underline underline-offset-4 hover:text-secondary-light" href="/skills/">Skills</a> section. The <a class="font-semibold text-secondary underline underline-offset-4 hover:text-secondary-light" href="/projects/">Projects</a> page gives a deeper overview of the kind of work I usually do.</p>
     </Card>
 
     <!-- CTA -->
-    <Card tone="primary" class="w-full p-8 text-center">
-      <p class="text-lg text-slate-200">IoT, cloud applications and embedded systems are a true passion of mine.</p>
-      <p class="mt-2 text-slate-300"><a href="/contact/" class="font-semibold text-secondary underline underline-offset-4 hover:text-secondary-light">Reach out</a> if you want to discuss it.</p>
+    <Card tone="primary" class="overflow-hidden p-10 text-center">
+      <h2 class="text-2xl font-bold sm:text-3xl">Let's build something connected.</h2>
+      <p class="mx-auto mt-3 max-w-lg text-slate-300">IoT, cloud applications and embedded systems are a true passion of mine. Reach out if you want to discuss it.</p>
+      <a href="/contact/" data-magnetic class="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-on-primary shadow-lg shadow-primary/30 hover:bg-primary-light">Reach out <ArrowRight class="size-5" /></a>
     </Card>
   </div>
 </Layout>

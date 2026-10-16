@@ -1,10 +1,11 @@
 ---
-interface Props { title: string; subtitle?: string }
-const { title, subtitle } = Astro.props;
+interface Props { title: string; subtitle?: string; eyebrow?: string }
+const { title, subtitle, eyebrow } = Astro.props;
 ---
-<header class="mx-auto mb-10 max-w-3xl text-center animate-fade-up">
+<header class="mx-auto mb-12 max-w-3xl text-center animate-fade-up">
+  {eyebrow && <p class="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-secondary">{eyebrow}</p>}
   <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">
     <span class="bg-gradient-to-r from-primary-light via-secondary to-secondary-light bg-clip-text text-transparent">{title}</span>
   </h1>
-  {subtitle && <p class="mt-4 text-lg text-slate-300">{subtitle}</p>}
+  {subtitle && <p class="mx-auto mt-4 max-w-xl text-lg text-slate-300">{subtitle}</p>}
 </header>
