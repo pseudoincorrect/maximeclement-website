@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import PageTitle from '../components/PageTitle.astro';
+import Mail from '@lucide/astro/icons/mail';
+import Copy from '@lucide/astro/icons/copy';
+import Icons from '../components/Icons.astro';
+import { SITE } from '../data/site';
+---
+<Layout title="Contact" description="Contact Maxime Clément by email." keywords="contact, email" background="/images/contact/background.jpg">
+  <PageTitle title="Drop me a message!" />
+  <Card tone="secondary" class="mx-auto flex max-w-lg flex-col items-center gap-6 p-8 text-center">
+    <div class="rounded-full bg-secondary/10 p-6 ring-1 ring-secondary/40"><Mail class="size-20 text-secondary" /></div>
+    <a href={`mailto:${SITE.email}`} class="break-all text-xl font-semibold text-secondary hover:text-secondary-light">{SITE.email}</a>
+    <button id="copy" type="button" data-email={SITE.email}
+      class="inline-flex items-center gap-2 rounded-xl border border-secondary/60 px-5 py-2.5 font-medium text-secondary transition hover:bg-secondary/10">
+      <Copy class="size-4" /><span id="copy-label">Copy address</span>
+    </button>
+    <div class="flex gap-5 border-t border-white/10 pt-6">
+      <a href={SITE.socials.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="text-slate-300 hover:text-secondary"><Icons name="linkedin" class="size-7" /></a>
+      <a href={SITE.socials.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="text-slate-300 hover:text-secondary"><Icons name="github" class="size-7" /></a>
+    </div>
+  </Card>
+</Layout>
+<script>
+  const btn = document.getElementById('copy')!;
+  const label = document.getElementById('copy-label')!;
+  btn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(btn.dataset.email!);
+      label.textContent = 'Copied!';
+    } catch {
+      label.textContent = 'Copy failed';
+    }
+    setTimeout(() => (label.textContent = 'Copy address'), 2000);
+  });
+</script>

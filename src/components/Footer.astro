@@ -1,0 +1,25 @@
+---
+import Mail from '@lucide/astro/icons/mail';
+import Code from '@lucide/astro/icons/code';
+import Icons from './Icons.astro';
+import { SITE } from '../data/site';
+const links = [
+  { href: SITE.socials.linkedin, label: 'LinkedIn', kind: 'linkedin' },
+  { href: SITE.socials.github, label: 'GitHub', kind: 'github' },
+  { href: SITE.socials.codewars, label: 'Codewars', kind: 'code' },
+  { href: '/contact/', label: 'Contact', kind: 'mail' },
+];
+---
+<footer class="mx-auto mt-20 w-[90%] max-w-5xl border-t border-white/10 py-8">
+  <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
+    <p class="text-sm text-slate-400">© {new Date().getFullYear()} {SITE.name} · Built with Astro &amp; Tailwind CSS</p>
+    <nav class="flex items-center gap-5" aria-label="Social links">
+      {links.map((l) => (
+        <a href={l.href} aria-label={l.label} title={l.label} rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined} target={l.href.startsWith('http') ? '_blank' : undefined}
+           class="text-slate-300 transition hover:-translate-y-0.5 hover:text-secondary">
+          {l.kind === 'mail' ? <Mail class="size-6" /> : l.kind === 'code' ? <Code class="size-6" /> : <Icons name={l.kind as 'github' | 'linkedin'} />}
+        </a>
+      ))}
+    </nav>
+  </div>
+</footer>

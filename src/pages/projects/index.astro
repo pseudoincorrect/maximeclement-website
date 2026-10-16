@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageTitle from '../../components/PageTitle.astro';
+import Card from '../../components/Card.astro';
+import projects from '../../data/projects.json';
+import type { Project } from '../../data/types';
+const list = projects as Project[];
+---
+<Layout title="Projects" description="Projects made by Maxime Clément revolving around the Internet of Things (IoT)." keywords="Full-stack, frontend, backend, hardware, firmware, deployment" background="/images/projects/background.jpg" image="/images/projects/lorawanHealthOverview/architecture_1.png">
+  <PageTitle title="Projects" subtitle="A selection of IoT, cloud and embedded projects." />
+  <div class="mx-auto max-w-6xl">
+    <div class="mb-8 flex justify-center">
+      <a href="/projects/all/" class="rounded-xl border border-secondary/60 px-5 py-2.5 text-sm font-semibold text-secondary transition hover:bg-secondary/10">View all projects in detail</a>
+    </div>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {list.map((p, i) => (
+        <a href={`/projects/${i}/`} class="group block">
+          <Card tone="neutral" class="flex h-full flex-col overflow-hidden transition duration-300 group-hover:-translate-y-1 group-hover:border-secondary/60">
+            <div class="aspect-[16/9] overflow-hidden bg-black/40">
+              <img src={p.mainPictures[0].path} alt={p.mainPictures[0].alt} loading={i < 3 ? 'eager' : 'lazy'} class="size-full object-cover transition duration-500 group-hover:scale-105" />
+            </div>
+            <div class="flex flex-1 flex-col p-5">
+              <h2 class="mb-1 text-xl font-bold text-accent">{p.title}</h2>
+              <p class="mb-3 text-xs text-slate-400">{p.date}</p>
+              <p class="flex-1 text-sm leading-relaxed text-slate-300">{p.shortSummary}</p>
+              <ul class="mt-4 flex flex-wrap gap-1.5">
+                {p.tags.slice(0, 3).map((t) => <li class="rounded-full bg-primary/20 px-2.5 py-0.5 text-[0.7rem] text-slate-200 ring-1 ring-primary/40">{t}</li>)}
+              </ul>
+            </div>
+          </Card>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>

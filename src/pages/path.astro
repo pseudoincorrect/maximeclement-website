@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageTitle from '../components/PageTitle.astro';
+import Briefcase from '@lucide/astro/icons/briefcase';
+import GraduationCap from '@lucide/astro/icons/graduation-cap';
+import MapPin from '@lucide/astro/icons/map-pin';
+import path from '../data/path.json';
+import type { PathItem } from '../data/types';
+const items = path as PathItem[];
+---
+<Layout title="Career" description="Previous experience and education of Maxime Clément." keywords="School, diploma, work experience, university, CV, timeline" background="/images/path/background.jpg" image="/images/path/esstin.jpg">
+  <PageTitle title="Career" subtitle="Work experience and education." />
+  <ol class="relative mx-auto max-w-4xl">
+    <div class="absolute bottom-0 left-5 top-0 w-0.5 bg-gradient-to-b from-secondary via-primary to-transparent md:left-1/2 md:-translate-x-1/2"></div>
+    {items.map((it, i) => (
+      <li class="relative mb-10 pl-14 md:pl-0">
+        <span class="absolute left-0 top-4 z-10 flex size-10 items-center justify-center rounded-full bg-bg-deep text-secondary ring-2 ring-secondary md:left-1/2 md:-translate-x-1/2">
+          {it.isSchool ? <GraduationCap class="size-5" /> : <Briefcase class="size-5" />}
+        </span>
+        <div class:list={['md:w-[calc(50%-2.5rem)]', i % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto']}>
+          <article class="timeline-content overflow-hidden rounded-2xl border border-white/10 bg-bg-paper/70 shadow-xl backdrop-blur-md" style={`border-top: 3px solid ${it.colorBg.replace(/0\.1\)/, '0.8)')}`}>
+            <img src={it.picturePath} alt={it.title} loading={i < 2 ? 'eager' : 'lazy'} class="aspect-[5/3] w-full object-cover" />
+            <div class="p-5">
+              <p class="mb-1 text-sm font-semibold text-secondary">{it.dateRange}</p>
+              <h2 class="text-xl font-bold">{it.title}</h2>
+              <p class="mb-3 mt-1 flex items-start gap-1.5 text-sm text-slate-400"><MapPin class="mt-0.5 size-4 shrink-0" />{it.location}</p>
+              <ul class="space-y-2 text-sm leading-relaxed text-slate-300">
+                {it.keyPoints.map((k) => <li set:html={k} />)}
+              </ul>
+            </div>
+          </article>
+        </div>
+      </li>
+    ))}
+  </ol>
+</Layout>

@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import PageTitle from '../components/PageTitle.astro';
+import PieChart from '../components/PieChart.astro';
+import RadarChart from '../components/RadarChart.astro';
+
+const pie = [
+  { name: 'Frontend', value: 200, color: '#e09f3e' },
+  { name: 'Backend', value: 400, color: '#335c67' },
+  { name: 'Hard/Firmware', value: 300, color: '#9e2a2b' },
+  { name: 'Project Mgmt', value: 200, color: '#540b0e' },
+];
+const radar = [
+  { label: 'TypeScript & JS', value: 95 },
+  { label: 'Python', value: 85 },
+  { label: 'C', value: 95 },
+  { label: 'HTML/CSS', value: 85 },
+  { label: 'Go', value: 85 },
+  { label: 'Dart', value: 90 },
+  { label: 'Bash', value: 75 },
+];
+
+type Group = { title: string; items: (string | { title: string; items: string[] })[] };
+const expertise: Group[] = [
+  { title: 'Backend', items: ['SQL & NoSQL databases', 'Serverless cloud architecture', 'Container architecture', 'Event-driven and message-queuing architecture', 'Parallel processing', 'Continuous integration / delivery and TDD', 'Infrastructure as code', 'Cybersecurity (IoT standards)'] },
+  { title: 'Frontend', items: ['Web and mobile applications', '(Near) real-time data applications', 'Dynamic websites', 'Familiar with UX design patterns'] },
+  { title: 'Hardware and Firmware', items: ['Microcontroller programming', 'Wireless protocols (Bluetooth, Wi-Fi, LoRaWAN, Thread, ...)', 'Low-power and ultra-low-power applications', 'Digital signal processing', 'Printed circuit board (PCB) design', 'Prototyping'] },
+  { title: 'Project Management', items: ['Managed multiple projects', 'Budget analysis for each of them', 'Kanban methods similar to Agile ones', 'Report writing'] },
+];
+const soft: Group[] = [
+  { title: 'Instructing', items: ['Designed and taught 2 hardware classes (laboratories)', 'Instructed researchers/students on projects within my area of expertise', 'Enjoy presenting!'] },
+  { title: 'Teamwork', items: ['Comfortable working in a team', 'Code reviews', "Well... I don't like to eat alone"] },
+];
+const frameworks: Group[] = [
+  { title: 'Backend', items: ['Microservices with Docker', 'AWS serverless with the CDK framework', 'SQL and NoSQL databases (PostgreSQL, DynamoDB, MongoDB...)', 'Time-series databases (InfluxDB, Timestream)', 'REST API, gRPC API (Express and Go)', 'Node.js JavaScript runtime or Go', 'Quite a few other backend technologies/frameworks'] },
+  { title: 'Frontend', items: ['React / Next.js / Astro', 'Flutter (mobile apps)', 'Angular (less often)'] },
+  { title: 'Embedded Systems', items: [
+    { title: 'Microcontrollers', items: ['ST Microelectronics (regular MCU)', 'Nordic Semiconductor (Bluetooth and Thread)', 'STM/Murata (LoRaWAN)', 'ESP32 (Wi-Fi)', 'Texas Instruments (Wi-Fi)'] },
+    { title: 'Single-board computers', items: ['Odroid', 'Raspberry Pi'] },
+    { title: 'FPGAs', items: ['Intel FPGA + Quartus / ModelSim / Nios'] },
+  ] },
+  { title: 'PCB Design (EDA)', items: ['Altium Designer', 'Eagle (Autodesk, CadSoft)'] },
+  { title: 'Testing and CI/CD', items: ['C: Ceedling (Unity + CMock + CException)', 'JavaScript: Jest, Jasmine, Karma', 'GitLab, AWS CodePipeline'] },
+  { title: 'Compiling and Programming Tooling', items: ['VS Code + GCC + vendor flashing/debug tools', 'Keil, Segger Embedded Studio, Code Composer Studio', 'Many other proprietary IDEs', 'Ask me about it'] },
+  { title: 'Versioning and Collaborative Software', items: ['Git'] },
+  { title: 'Computer-Aided Design (CAD)', items: ['Fusion 360', 'SolidWorks'] },
+  { title: 'Operating Systems', items: ['Linux distros, RPM and Debian', 'macOS (my pick for web development)', 'Windows (my pick for embedded systems development)', 'Comfortable with a terminal'] },
+];
+const panels = [
+  { title: 'Areas of Expertise (details)', groups: expertise },
+  { title: 'Soft Skills', groups: soft },
+  { title: 'Frameworks & Tools', groups: frameworks },
+];
+---
+<Layout title="Skills" description="Skills and expertise of Maxime Clément." keywords="Programming languages, frameworks, expertise, software development, cloud applications" background="/images/skills/background.jpg" image="/images/home/iot_diagram.jpg">
+  <PageTitle title="Skills" subtitle="What I work with, and how comfortable I am with it." />
+  <div class="mx-auto grid max-w-6xl gap-6 lg:grid-cols-2">
+    <Card tone="primary" class="p-6">
+      <h2 class="mb-4 text-center text-2xl font-bold">Areas of Expertise</h2>
+      <PieChart data={pie} />
+    </Card>
+    <Card tone="primary" class="p-6">
+      <h2 class="mb-4 text-center text-2xl font-bold">Coding Skills</h2>
+      <RadarChart data={radar} />
+    </Card>
+    {panels.map((p, idx) => (
+      <Card tone="primary" class:list={['p-6', idx === 2 && 'lg:col-span-2']}>
+        <h2 class="mb-4 border-b border-white/10 pb-3 text-center text-2xl font-bold">{p.title}</h2>
+        <div class:list={[idx === 2 && 'grid gap-x-10 md:grid-cols-2']}>
+          {p.groups.map((g) => (
+            <section class="mb-4 break-inside-avoid">
+              <h3 class="mb-1.5 text-lg font-bold text-accent">{g.title}</h3>
+              <ul class="space-y-1 text-slate-300">
+                {g.items.map((it) => typeof it === 'string' ? (
+                  <li class="flex gap-2"><span class="mt-2 size-1.5 shrink-0 rounded-full bg-secondary"></span>{it}</li>
+                ) : (
+                  <li class="mt-2">
+                    <h4 class="font-semibold text-slate-100">{it.title}</h4>
+                    <ul class="ml-4 space-y-1">{it.items.map((s) => <li class="flex gap-2"><span class="mt-2 size-1.5 shrink-0 rounded-full bg-primary-light"></span>{s}</li>)}</ul>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+      </Card>
+    ))}
+  </div>
+</Layout>

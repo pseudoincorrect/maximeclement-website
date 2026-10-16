@@ -1,41 +1,32 @@
 {
-  "name": "maxime-clement-portfolio-reactjs",
-  "description": "https://maximeclement-portfolio-nextjs.vercel.app/",
-  "version": "5.0.0",
+  "name": "maxime-clement-portfolio-astro",
+  "description": "https://www.maximeclement.com - Portfolio of Maxime Clément, IoT & Cloud Engineer",
+  "version": "6.0.0",
   "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.22.0",
+    "npm": ">=10.0.0"
+  },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "export": "next export",
-    "lint": "next lint",
-    "sitemap": "next-sitemap --config next-sitemap-config.js"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check"
   },
   "dependencies": {
-    "@emotion/cache": "^11.7.1",
-    "@emotion/react": "^11.9.0",
-    "@emotion/server": "^11.4.0",
-    "@emotion/styled": "^11.8.1",
-    "@fontsource/open-sans": "^4.5.2",
-    "@mui/icons-material": "^5.8.0",
-    "@mui/material": "^5.8.0",
-    "next": "^12.1.6",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-swipeable-views": "^0.14.0",
-    "react-swipeable-views-utils": "^0.14.0",
-    "react-vertical-timeline-component": "^3.5.2",
-    "recharts": "^2.1.8"
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/montserrat": "^5.2.8",
+    "@lucide/astro": "^1.16.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.4.0",
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "@types/node": "^17.0.34",
-    "@types/react": "^18.0.9",
-    "@types/react-swipeable-views": "^0.13.1",
-    "@types/react-swipeable-views-utils": "^0.13.3",
-    "@types/react-vertical-timeline-component": "^3.3.1",
-    "eslint": "^8.15.0",
-    "eslint-config-next": "^12.1.6",
-    "next-sitemap": "^2.0.7",
-    "typescript": "^4.6.4"
+    "@astrojs/check": "^0.9.10",
+    "@types/node": "^26.6.5",
+    "typescript": "^5.9.3"
   }
 }

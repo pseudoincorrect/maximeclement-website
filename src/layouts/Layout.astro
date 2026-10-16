@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+import Seo from '../components/Seo.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  image?: string;
+  background?: string;
+}
+const { title = SITE.name, description = SITE.description, keywords, image, background = '/images/home/background.jpg' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#171a2c" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="generator" content={Astro.generator} />
+    <Seo {title} {description} {keywords} {image} />
+  </head>
+  <body class="relative">
+    <div class="fixed inset-0 -z-20">
+      <img src={background} alt="" class="size-full object-cover opacity-40" fetchpriority="high" />
+    </div>
+    <div class="fixed inset-0 -z-10 bg-gradient-to-b from-bg-deep/80 via-bg-default/70 to-bg-deep/90"></div>
+    <Sidebar />
+    <div class="flex min-h-screen flex-col pt-16 lg:pl-64 lg:pt-0">
+      <main class="flex-1 px-4 py-10 sm:px-8 lg:py-14"><slot /></main>
+      <Footer />
+    </div>
+  </body>
+</html>

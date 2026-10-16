@@ -1,0 +1,95 @@
+[
+ {
+  "isSchool": false,
+  "title": "IoT Engineer, Lab Manager",
+  "location": "HBKU University, Doha, Qatar",
+  "dateRange": "2016 - Present",
+  "picturePath": "/images/path/hbku.jpg",
+  "colorBg": "rgba(0, 255, 255, 0.1)",
+  "colorFg": "#FFF",
+  "keyPoints": [
+   "IoT Fullstack applications: smartwatch with <b>fullstack</b> app, smart mask with <b>frontend</b>, Wi-Fi monitoring device with <b>fullstack</b> app, Management tool for IoT device on <b>cloud</b> ",
+   "<b>Management and implementation</b> of multiple projects.",
+   "Setting-up of an <b>electronic laboratory</b> for the computer science division (ICT)"
+  ]
+ },
+ {
+  "isSchool": false,
+  "title": "Embedded Systems Engineer",
+  "location": "LORIA (INRIA, CNRS, Université de Lorraine), Nancy, France",
+  "dateRange": "2014 - 2015",
+  "picturePath": "/images/path/loria.jpg",
+  "colorBg": "rgba(255, 00, 255, 0.1)",
+  "colorFg": "#FFF",
+  "keyPoints": [
+   "Design and implementation of a <b>rodent brain implant</b> device (hardware, firmware and GUI) that would allow our team to record the neural signal of a rodent (mouse, rat) during a set of experimentation",
+   "Optimization of a FBAR <b>compression algorithm</b> to acquire a higher number of neural channels (points of acquisition in the brain)",
+   "Design and implementation of a <b>bluetooth acquisition</b> device for neuromuscular signal of living moth."
+  ]
+ },
+ {
+  "isSchool": true,
+  "title": "Internship Loria/ESSTIN",
+  "location": "LORIA (INRIA, CNRS, Université de Lorraine), Nancy, France",
+  "dateRange": "2014",
+  "picturePath": "/images/path/esstinloria.jpg",
+  "colorBg": "rgba(0, 0, 255,0.1)",
+  "colorFg": "#FFF",
+  "keyPoints": [
+   "Development of an <b> acquisition system </b>for moths electrophysiological signals",
+   "Feasibility study of the implementation of a cable robot which would follow a moth in-flight and record electrophysiological data."
+  ]
+ },
+ {
+  "isSchool": true,
+  "title": "MS. in Embedded Systems",
+  "location": "Université de Lorraine, Nancy, France",
+  "dateRange": "2013 - 2014",
+  "picturePath": "/images/path/ul.jpg",
+  "colorBg": "rgba(255, 0, 0, 0.1)",
+  "colorFg": "#FFF",
+  "keyPoints": [
+   "Dual master degree in Embedded Systems & Microsystems engineering",
+   "Topics: <b>computer architecture</b>, hardware implementation, firmware design"
+  ]
+ },
+ {
+  "isSchool": true,
+  "title": "MS. in System Control (Diplôme d'Ingénieur)",
+  "location": "ESSTIN, Nancy, France",
+  "dateRange": "2008 - 2014",
+  "picturePath": "/images/path/esstin.jpg",
+  "colorBg": "rgba(0, 255, 0, 0.1)",
+  "colorFg": "#FFF",
+  "keyPoints": [
+   "ESSTIN is a “Grande Ecole d’ingénieur”, a school dedicated to form engineers on various subjects",
+   "Specification in Systems and Control, mixing <b>mathematics and computer sciences </b>"
+  ]
+ },
+ {
+  "isSchool": true,
+  "title": "ERASMUS international student exchange program",
+  "location": "Luleå University of Technology (LTU), Luleå, Sweden",
+  "dateRange": "2012 - 2013",
+  "picturePath": "/images/path/lulea.jpg",
+  "colorBg": "rgba(255, 0, 255, 0.1)",
+  "colorFg": "#FFF",
+  "keyPoints": [
+   "Studied 8 months in Luleå, north of Sweden (practically on the arctic circle)",
+   "Topics were <b>computer sciences, electronic and embedded system</b>. This is the time I knew which career to pursue (in IoT)"
+  ]
+ },
+ {
+  "isSchool": true,
+  "title": "High School Diploma",
+  "location": "Lycée Andrée Malraux, Remiremont, France",
+  "dateRange": "2008",
+  "picturePath": "/images/path/malraux.jpg",
+  "colorBg": "rgba(255, 255, 255, 0.1)",
+  "colorFg": "#FFF",
+  "keyPoints": [
+   "It is in the lovely city of Remiremont (France) that I made my high school studies",
+   "Naturally I chose the <b>scientific path </b>that further led me throughout my engineering career"
+  ]
+ }
+]

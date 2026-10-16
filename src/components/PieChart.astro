@@ -1,0 +1,28 @@
+---
+interface Props { data: { name: string; value: number; color: string }[] }
+const { data } = Astro.props;
+const total = data.reduce((s, d) => s + d.value, 0);
+const R = 100, C = 120;
+let angle = -Math.PI / 2;
+const slices = data.map((d) => {
+  const a = (d.value / total) * Math.PI * 2;
+  const x1 = C + R * Math.cos(angle), y1 = C + R * Math.sin(angle);
+  const mid = angle + a / 2;
+  angle += a;
+  const x2 = C + R * Math.cos(angle), y2 = C + R * Math.sin(angle);
+  return {
+    ...d,
+    path: `M${C},${C} L${x1},${y1} A${R},${R} 0 ${a > Math.PI ? 1 : 0} 1 ${x2},${y2} Z`,
+    lx: C + R * 0.62 * Math.cos(mid), ly: C + R * 0.62 * Math.sin(mid),
+    pct: Math.round((d.value / total) * 100),
+  };
+});
+---
+<svg viewBox="0 0 240 240" class="mx-auto w-full max-w-sm" role="img" aria-label={'Areas of expertise: ' + slices.map((s) => `${s.name} ${s.pct}%`).join(', ')}>
+  {slices.map((s) => (
+    <g>
+      <path d={s.path} fill={s.color} stroke="#171a2c" stroke-width="2" class="transition hover:opacity-80" />
+      <text x={s.lx} y={s.ly} fill="white" font-size="9.5" font-weight="700" text-anchor="middle" dominant-baseline="central">{s.name}</text>
+    </g>
+  ))}
+</svg>

@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import PageTitle from '../components/PageTitle.astro';
+import Download from '@lucide/astro/icons/download';
+import FileText from '@lucide/astro/icons/file-text';
+const docs = [
+  { label: 'CV - English', href: '/documents/cv/CV English Maxime Clement.pdf' },
+  { label: 'CV - Français', href: '/documents/cv/CV Francais Maxime Clement.pdf' },
+];
+---
+<Layout title="Documents" description="Download the CV of Maxime Clément." keywords="documents, download, CV" background="/images/contact/background.jpg">
+  <PageTitle title="Documents" subtitle="Download my CV in English or French." />
+  <Card tone="secondary" class="mx-auto flex max-w-lg flex-col gap-4 p-8">
+    {docs.map((d) => (
+      <a href={encodeURI(d.href)} download class="group flex items-center justify-between gap-4 rounded-xl bg-primary/20 px-6 py-5 ring-1 ring-primary/50 transition hover:bg-primary/40">
+        <span class="flex items-center gap-3 text-lg font-semibold"><FileText class="size-6 text-secondary" />{d.label}</span>
+        <Download class="size-6 transition group-hover:translate-y-0.5" />
+      </a>
+    ))}
+  </Card>
+</Layout>

@@ -1,7 +1,0 @@
-
-Use a container to size the Image, not the image itself, otherwise the ration will be wrong
-
-Image container has to be `position = 'relative'` (most of the time)
-
-Do NOT use media query in inline CSS (within sx={{}} or style={{}})
-

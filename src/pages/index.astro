@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import Hl from '../components/Hl.astro';
+import ArrowRight from '@lucide/astro/icons/arrow-right';
+
+const examples = [
+  'Connected machinery in factories',
+  'Smart city lighting',
+  'Smart home appliances',
+  'Online package tracking',
+  'Smart cars',
+  'Connected sensors on power grids',
+];
+const stack = [
+  ['Go or TypeScript', 'for backend development'],
+  ['Serverless (CDK) and Containers (Docker)', 'for backend microservices'],
+  ['React (or sometimes Angular)', 'on the frontend'],
+  ['AWS', 'for deployment and CI/CD (with GitLab)'],
+  ['Python', 'for scripting, DSP prototyping and algorithm design'],
+  ['Dart/Flutter', 'for mobile application development'],
+  ['C', 'for firmware programming'],
+  ['Bash', 'when shell scripts are needed'],
+  ['Altium (or Eagle)', 'for Printed Circuit Board design'],
+];
+const chain = ['Electronic device(s)', 'Firmware', 'Internet connection', 'Backend', 'Website or mobile app'];
+---
+<Layout keywords="Portfolio, Home, Full-stack, Backend, Frontend, IoT">
+  <div class="mx-auto flex max-w-4xl flex-col items-center gap-10">
+    <!-- Hero -->
+    <section class="flex flex-col items-center text-center">
+      <p class="mb-8 rounded-full border border-primary/50 bg-primary/10 px-5 py-2 text-sm font-medium text-slate-200 backdrop-blur">
+        Need <b class="text-secondary">IoT</b> in your projects? I can help with that.
+      </p>
+      <div class="animate-pulse-glow rounded-full p-1.5 ring-2 ring-secondary/60">
+        <img src="/images/home/max_pict.jpg" alt="Maxime Clément, IoT Engineer" width="288" height="288"
+          class="size-52 rounded-full object-cover sm:size-72" fetchpriority="high" />
+      </div>
+      <h1 class="animate-pop mt-8 text-5xl font-extrabold tracking-tight sm:text-6xl">Bonjour !</h1>
+      <p class="mt-4 text-xl text-slate-200 sm:text-2xl">Maxime here, <span class="text-secondary">IoT Engineer</span> (Internet of Things)</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="/projects/" class="group inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-white shadow-lg shadow-primary/30 transition hover:bg-primary-light">
+          See my projects <ArrowRight class="size-5 transition group-hover:translate-x-1" />
+        </a>
+        <a href="/contact/" class="inline-flex items-center rounded-xl border border-secondary/60 px-6 py-3 font-semibold text-secondary transition hover:bg-secondary/10">Get in touch</a>
+      </div>
+    </section>
+
+    <!-- What is IoT -->
+    <Card tone="secondary" class="w-full p-6 sm:p-8">
+      <h2 class="mb-4 text-2xl font-bold">What is <span class="text-secondary">IoT</span>?</h2>
+      <blockquote class="border-l-4 border-secondary/60 pl-4 italic text-slate-300">
+        The Internet of Things (IoT) is the extension of Internet connectivity into physical devices. Embedded with electronics, Internet connectivity, and other forms of hardware (such as sensors), these devices can communicate and interact with others over the Internet, and they can be remotely monitored and controlled.
+        <footer class="mt-2 text-sm not-italic text-slate-400">— Wikipedia</footer>
+      </blockquote>
+      <p class="mt-5 text-lg font-semibold text-secondary">IoT represents the technologies behind [electronic] devices connected to the internet.</p>
+      <div class="mt-6 grid items-center gap-6 sm:grid-cols-2">
+        <img src="/images/home/echo_dot.jpg" alt="An IoT device" loading="lazy" width="192" height="192" class="mx-auto size-48 rounded-full object-cover ring-2 ring-white/10" />
+        <div>
+          <p class="mb-2 text-slate-300">A few examples:</p>
+          <ul class="space-y-1.5 text-slate-300">
+            {examples.map((e) => <li class="flex gap-2"><span class="mt-2 size-1.5 shrink-0 rounded-full bg-secondary"></span>{e}</li>)}
+          </ul>
+        </div>
+      </div>
+    </Card>
+
+    <!-- What I do -->
+    <Card tone="primary" class="w-full p-6 sm:p-8">
+      <h2 class="mb-4 text-2xl font-bold">What I do</h2>
+      <p class="text-slate-300">
+        I have been working in this domain, mixing <Hl>web technologies</Hl>, <Hl>software</Hl> and <Hl>hardware</Hl> since 2014.
+        Most of my projects combine <Hl>cloud applications</Hl> and <Hl>physical devices</Hl> to create a novel solution to the problem at hand.
+      </p>
+      <div class="mt-6 grid items-center gap-6 sm:grid-cols-2">
+        <img src="/images/home/iot_diagram.jpg" alt="IoT system diagram" loading="lazy" width="500" height="325" class="w-full rounded-xl object-cover ring-1 ring-white/10" />
+        <div>
+          <p class="mb-3 text-slate-300">A typical application involves:</p>
+          <ol class="space-y-2">
+            {chain.map((c, i) => (
+              <li class="flex items-center gap-3 text-slate-200">
+                <span class="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/30 text-sm font-bold text-secondary ring-1 ring-primary/60">{i + 1}</span>{c}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </Card>
+
+    <!-- Tools -->
+    <Card tone="secondary" class="w-full p-6 sm:p-8">
+      <h2 class="mb-4 text-2xl font-bold">Tools of the trade</h2>
+      <p class="text-slate-300">A large variety of tools and programming languages are involved in this process. I try as much as I can to <Hl>pick the most appropriate tool for the job</Hl>.</p>
+      <div class="mt-6 grid items-start gap-6 md:grid-cols-3">
+        <ul class="space-y-2.5 md:col-span-2">
+          {stack.map(([name, desc]) => (
+            <li class="flex gap-2 text-slate-300"><span class="mt-2 size-1.5 shrink-0 rounded-full bg-secondary"></span><span><Hl>{name}</Hl> {desc}</span></li>
+          ))}
+        </ul>
+        <img src="/images/home/programming_languages.jpg" alt="Programming languages" loading="lazy" width="320" height="208" class="w-full rounded-xl object-cover ring-1 ring-white/10" />
+      </div>
+      <p class="mt-6 text-slate-300">A long list of frameworks, SDKs, vendor IPs and hardware are used along the way. More information in the <a class="font-semibold text-secondary underline underline-offset-4 hover:text-secondary-light" href="/skills/">Skills</a> section. The <a class="font-semibold text-secondary underline underline-offset-4 hover:text-secondary-light" href="/projects/">Projects</a> page gives a deeper overview of the kind of work I usually do.</p>
+    </Card>
+
+    <!-- CTA -->
+    <Card tone="primary" class="w-full p-8 text-center">
+      <p class="text-lg text-slate-200">IoT, cloud applications and embedded systems are a true passion of mine.</p>
+      <p class="mt-2 text-slate-300"><a href="/contact/" class="font-semibold text-secondary underline underline-offset-4 hover:text-secondary-light">Reach out</a> if you want to discuss it.</p>
+    </Card>
+  </div>
+</Layout>
