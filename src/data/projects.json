@@ -146,7 +146,7 @@
    }
   ],
   "shortSummary": "My personal website, built with Astro and Tailwind CSS. You are on it right now :) A chance to do some frontend work and keep track of my projects.",
-  "summary": "<p>This website is fully static and built with loading speed and <b>Search Engine Optimization</b> in mind, thanks to <b>Astro</b> and <b>Tailwind CSS</b>. It ships almost no JavaScript.</p><p>It has been rewritten several times: first with Angular 2, then with Next.js and MUI, and now with Astro and Tailwind CSS, to be as light and fast as possible.</p><p>Project on <a href='https://github.com/pseudoincorrect/maximeclement-portfolio-nextjs'>GitHub</a></p>",
+  "summary": "<p>This website is fully static and built with loading speed and <b>Search Engine Optimization</b> in mind, thanks to <b>Astro</b> and <b>Tailwind CSS</b>. It ships almost no JavaScript.</p><p>It has been rewritten several times: first with Angular 2, then with Next.js and MUI, and now with Astro and Tailwind CSS, to be as light and fast as possible.</p><p>Project on <a href='https://github.com/pseudoincorrect/maximeclement-website'>GitHub</a></p>",
   "details": "<p>A static and well-optimized website, nothing too fancy.</p><p>The color selection and UI design are my own.</p>",
   "tags": [
    "Astro",
