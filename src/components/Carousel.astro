@@ -2,25 +2,66 @@
 import ChevronLeft from '@lucide/astro/icons/chevron-left';
 import ChevronRight from '@lucide/astro/icons/chevron-right';
 import type { Picture } from '../data/types';
-interface Props { images: Picture[]; height?: string; lightbox?: boolean }
+
+interface Props {
+  images: Picture[];
+  height?: string;
+  lightbox?: boolean;
+}
 const { images, height = 'h-64 sm:h-80', lightbox = true } = Astro.props;
 ---
+
 <div class="relative" data-carousel>
-  <div class:list={['flex snap-x snap-mandatory overflow-x-auto scroll-smooth rounded-xl bg-black/30 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden', height]} data-track tabindex="0" role="region" aria-label="Image gallery (use arrow keys)">
+  <div
+    class:list={[
+      'flex snap-x snap-mandatory overflow-x-auto scroll-smooth rounded-xl bg-black/30 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
+      height,
+    ]}
+    data-track
+    tabindex="0"
+    role="region"
+    aria-label="Image gallery (use arrow keys)"
+  >
     {images.map((img, i) => (
       <div class="size-full shrink-0 snap-center">
-        <img src={img.path} alt={img.alt} loading={i === 0 ? 'eager' : 'lazy'} decoding="async"
+        <img
+          src={img.path}
+          alt={img.alt}
+          loading={i === 0 ? 'eager' : 'lazy'}
+          decoding="async"
           data-lightbox={lightbox ? '' : undefined}
-          class:list={['size-full object-contain', lightbox && 'cursor-zoom-in']} />
+          class:list={['size-full object-contain', lightbox && 'cursor-zoom-in']}
+        />
       </div>
     ))}
   </div>
   {images.length > 1 && (
     <>
-      <button type="button" data-prev aria-label="Previous image" class="absolute left-2 top-[calc(50%-0.75rem)] -translate-y-1/2 rounded-full bg-black/60 p-2 text-white backdrop-blur transition hover:bg-primary hover:text-on-primary"><ChevronLeft class="size-5" /></button>
-      <button type="button" data-next aria-label="Next image" class="absolute right-2 top-[calc(50%-0.75rem)] -translate-y-1/2 rounded-full bg-black/60 p-2 text-white backdrop-blur transition hover:bg-primary hover:text-on-primary"><ChevronRight class="size-5" /></button>
+      <button
+        type="button"
+        data-prev
+        aria-label="Previous image"
+        class="absolute left-2 top-[calc(50%-0.75rem)] -translate-y-1/2 rounded-full bg-black/60 p-2 text-white backdrop-blur transition hover:bg-primary hover:text-on-primary"
+      >
+        <ChevronLeft class="size-5" />
+      </button>
+      <button
+        type="button"
+        data-next
+        aria-label="Next image"
+        class="absolute right-2 top-[calc(50%-0.75rem)] -translate-y-1/2 rounded-full bg-black/60 p-2 text-white backdrop-blur transition hover:bg-primary hover:text-on-primary"
+      >
+        <ChevronRight class="size-5" />
+      </button>
       <div class="mt-3 flex flex-wrap justify-center gap-1.5">
-        {images.map((_, i) => <button type="button" aria-label={`Go to image ${i + 1}`} data-dot={i} class="size-2 rounded-full bg-white/30 transition aria-[current=true]:w-5 aria-[current=true]:bg-secondary"></button>)}
+        {images.map((_, i) => (
+          <button
+            type="button"
+            aria-label={`Go to image ${i + 1}`}
+            data-dot={i}
+            class="size-2 rounded-full bg-white/30 transition aria-[current=true]:w-5 aria-[current=true]:bg-secondary"
+          ></button>
+        ))}
       </div>
     </>
   )}

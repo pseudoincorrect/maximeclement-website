@@ -1,47 +1,124 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
-import PageTitle from '../components/PageTitle.astro';
-import Mail from '@lucide/astro/icons/mail';
 import Copy from '@lucide/astro/icons/copy';
-import Send from '@lucide/astro/icons/send';
 import Download from '@lucide/astro/icons/download';
+import Mail from '@lucide/astro/icons/mail';
+import Send from '@lucide/astro/icons/send';
+import Card from '../components/Card.astro';
 import Icons from '../components/Icons.astro';
+import PageTitle from '../components/PageTitle.astro';
 import { SITE } from '../data/site';
-const field = 'w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-secondary focus:outline-none';
+import Layout from '../layouts/Layout.astro';
+
+const field =
+  'w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-secondary focus:outline-none';
 ---
-<Layout title="Contact" description="Contact Maxime Clément by email." keywords="contact, email" background="/images/contact/background.jpg">
-  <PageTitle eyebrow="Say hello" title="Drop me a message!" subtitle="I usually reply within a couple of days." />
+
+<Layout
+  title="Contact"
+  description="Contact Maxime Clément by email."
+  keywords="contact, email"
+  background="/images/contact/background.jpg"
+>
+  <PageTitle
+    eyebrow="Say hello"
+    title="Drop me a message!"
+    subtitle="I usually reply within a couple of days."
+  />
   <div class="mx-auto grid max-w-4xl gap-6 md:grid-cols-5">
     <Card tone="secondary" class="flex flex-col items-center gap-5 p-8 text-center md:col-span-2">
-      <div class="rounded-full bg-secondary/10 p-5 ring-1 ring-secondary/40"><Mail class="size-12 text-secondary" /></div>
-      <a href={`mailto:${SITE.email}`} class="break-all font-semibold text-secondary hover:text-secondary-light">{SITE.email}</a>
-      <button type="button" data-copy={SITE.email} data-magnetic class="inline-flex items-center gap-2 rounded-xl border border-secondary/60 px-5 py-2.5 font-medium text-secondary hover:bg-secondary/10">
-        <Copy class="size-4" /><span data-copy-label>Copy address</span>
+      <div class="rounded-full bg-secondary/10 p-5 ring-1 ring-secondary/40">
+        <Mail class="size-12 text-secondary" />
+      </div>
+      <a
+        href={`mailto:${SITE.email}`}
+        class="break-all font-semibold text-secondary hover:text-secondary-light"
+      >
+        {SITE.email}
+      </a>
+      <button
+        type="button"
+        data-copy={SITE.email}
+        data-magnetic
+        class="inline-flex items-center gap-2 rounded-xl border border-secondary/60 px-5 py-2.5 font-medium text-secondary hover:bg-secondary/10"
+      >
+        <Copy class="size-4" />
+        <span data-copy-label>Copy address</span>
       </button>
-      <a href="/documents/cv/CV English Maxime Clement.pdf" download data-magnetic class="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 font-medium text-on-primary hover:bg-primary-light">
+      <a
+        href="/documents/cv/CV English Maxime Clement.pdf"
+        download
+        data-magnetic
+        class="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-2.5 font-medium text-on-primary hover:bg-primary-light"
+      >
         <Download class="size-4" /> Download CV
       </a>
       <div class="flex gap-5 border-t border-white/10 pt-5">
-        <a href={SITE.socials.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="text-slate-300 hover:text-secondary"><Icons name="linkedin" class="size-7" /></a>
-        <a href={SITE.socials.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="text-slate-300 hover:text-secondary"><Icons name="github" class="size-7" /></a>
+        <a
+          href={SITE.socials.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+          class="text-slate-300 hover:text-secondary"
+        >
+          <Icons name="linkedin" class="size-7" />
+        </a>
+        <a
+          href={SITE.socials.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+          class="text-slate-300 hover:text-secondary"
+        >
+          <Icons name="github" class="size-7" />
+        </a>
       </div>
     </Card>
     <Card tone="primary" class="p-8 md:col-span-3">
       <form data-mailto-form={SITE.email} class="space-y-4">
         <div>
-          <label for="name" class="mb-1.5 block text-sm font-medium text-slate-300">Name</label>
-          <input id="name" name="name" required autocomplete="name" placeholder="Your name" class={field} />
+          <label for="name" class="mb-1.5 block text-sm font-medium text-slate-300">
+            Name
+          </label>
+          <input
+            id="name"
+            name="name"
+            required
+            autocomplete="name"
+            placeholder="Your name"
+            class={field}
+          />
         </div>
         <div>
-          <label for="email" class="mb-1.5 block text-sm font-medium text-slate-300">Email <span class="text-slate-500">(optional)</span></label>
-          <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" class={field} />
+          <label for="email" class="mb-1.5 block text-sm font-medium text-slate-300">
+            Email <span class="text-slate-500">(optional)</span>
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            placeholder="you@example.com"
+            class={field}
+          />
         </div>
         <div>
-          <label for="message" class="mb-1.5 block text-sm font-medium text-slate-300">Message</label>
-          <textarea id="message" name="message" required rows="5" placeholder="Tell me about your project..." class={field}></textarea>
+          <label for="message" class="mb-1.5 block text-sm font-medium text-slate-300">
+            Message
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows="5"
+            placeholder="Tell me about your project..."
+            class={field}
+          ></textarea>
         </div>
-        <button type="submit" data-magnetic class="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-on-primary shadow-lg shadow-primary/30 hover:bg-primary-light">
+        <button
+          type="submit"
+          data-magnetic
+          class="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-on-primary shadow-lg shadow-primary/30 hover:bg-primary-light"
+        >
           <Send class="size-4" /> Send message
         </button>
         <p class="text-xs text-slate-500">This opens your email app with the message pre-filled.</p>

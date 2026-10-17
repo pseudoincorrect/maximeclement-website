@@ -1,8 +1,14 @@
 import type { Project } from './types';
 
 export const CATEGORIES: [string, RegExp][] = [
-  ['Cloud & Backend', /aws|cloud|backend|serverless|docker|microservice|\bgo\b|node\.?js|express|mongodb|postgres|full-?stack|online platform/i],
-  ['Embedded & Firmware', /firmware|embedded|microcontroller|\bmcu\b|stm32|nordic|esp32|\bc prog|c\/c\+\+|nrf/i],
+  [
+    'Cloud & Backend',
+    /aws|cloud|backend|serverless|docker|microservice|\bgo\b|node\.?js|express|mongodb|postgres|full-?stack|online platform/i,
+  ],
+  [
+    'Embedded & Firmware',
+    /firmware|embedded|microcontroller|\bmcu\b|stm32|nordic|esp32|\bc prog|c\/c\+\+|nrf/i,
+  ],
   ['PCB & Hardware', /pcb|altium|eagle|circuit|solder|hardware|wristwatch|wearable|sensor/i],
   ['Wireless', /bluetooth|wi-?fi|lorawan|thread|wireless|mesh|rf\b/i],
   ['FPGA & Digital', /fpga|verilog|computer arch|accelerat/i],

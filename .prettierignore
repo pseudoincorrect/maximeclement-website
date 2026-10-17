@@ -1,0 +1,15 @@
+# Build output
+dist/
+.output/
+
+# Generated types
+.astro/
+
+# Dependencies
+node_modules/
+
+# Package manager lockfile
+package-lock.json
+
+# Static assets (never formatted)
+public/

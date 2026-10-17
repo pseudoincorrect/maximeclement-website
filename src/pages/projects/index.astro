@@ -1,29 +1,63 @@
 ---
-import Layout from '../../layouts/Layout.astro';
 import PageTitle from '../../components/PageTitle.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
-import projects from '../../data/projects.json';
 import { CATEGORIES, categoriesOf } from '../../data/categories';
+import projects from '../../data/projects.json';
 import type { Project } from '../../data/types';
+import Layout from '../../layouts/Layout.astro';
+
 const list = projects as Project[];
-const counts = Object.fromEntries(CATEGORIES.map(([n]) => [n, list.filter((p) => categoriesOf(p).includes(n)).length]));
-const chip = 'rounded-full px-4 py-1.5 text-sm font-medium ring-1 ring-white/15 text-slate-300 transition hover:ring-secondary/60 hover:text-secondary aria-pressed:bg-secondary aria-pressed:text-bg-deep aria-pressed:ring-secondary';
+const counts = Object.fromEntries(
+  CATEGORIES.map(([n]) => [n, list.filter((p) => categoriesOf(p).includes(n)).length]),
+);
+const chip =
+  'rounded-full px-4 py-1.5 text-sm font-medium ring-1 ring-white/15 text-slate-300 transition hover:ring-secondary/60 hover:text-secondary aria-pressed:bg-secondary aria-pressed:text-bg-deep aria-pressed:ring-secondary';
 ---
-<Layout title="Projects" description="Projects made by Maxime Clément revolving around the Internet of Things (IoT)." keywords="Full-stack, frontend, backend, hardware, firmware, deployment" background="/images/projects/background.jpg" image="/images/projects/lorawanHealthOverview/architecture_1.png">
-  <PageTitle eyebrow="Portfolio" title="Projects" subtitle="A selection of IoT, cloud and embedded projects." />
+
+<Layout
+  title="Projects"
+  description="Projects made by Maxime Clément revolving around the Internet of Things (IoT)."
+  keywords="Full-stack, frontend, backend, hardware, firmware, deployment"
+  background="/images/projects/background.jpg"
+  image="/images/projects/lorawanHealthOverview/architecture_1.png"
+>
+  <PageTitle
+    eyebrow="Portfolio"
+    title="Projects"
+    subtitle="A selection of IoT, cloud and embedded projects."
+  />
   <div class="mx-auto max-w-6xl">
     <div class="mb-8 flex flex-col items-center gap-4">
-      <div class="flex flex-wrap justify-center gap-2" role="group" aria-label="Filter projects by category">
-        <button type="button" data-filter="all" aria-pressed="true" class={chip}>All <span class="opacity-60">{list.length}</span></button>
-        {CATEGORIES.map(([n]) => <button type="button" data-filter={n} aria-pressed="false" class={chip}>{n} <span class="opacity-60">{counts[n]}</span></button>)}
+      <div
+        class="flex flex-wrap justify-center gap-2"
+        role="group"
+        aria-label="Filter projects by category"
+      >
+        <button type="button" data-filter="all" aria-pressed="true" class={chip}>
+          All <span class="opacity-60">{list.length}</span>
+        </button>
+        {CATEGORIES.map(([n]) => (
+          <button type="button" data-filter={n} aria-pressed="false" class={chip}>
+            {n} <span class="opacity-60">{counts[n]}</span>
+          </button>
+        ))}
       </div>
       <div class="flex items-center gap-4 text-sm text-slate-400">
-        <span id="filter-count" aria-live="polite">{list.length} projects</span>
-        <a href="/projects/all/" class="font-semibold text-secondary underline underline-offset-4 hover:text-secondary-light">View all in detail</a>
+        <span id="filter-count" aria-live="polite">
+          {list.length} projects
+        </span>
+        <a
+          href="/projects/all/"
+          class="font-semibold text-secondary underline underline-offset-4 hover:text-secondary-light"
+        >
+          View all in detail
+        </a>
       </div>
     </div>
     <div class="grid grid-flow-dense gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {list.map((p, i) => <ProjectCard project={p} id={i} eager={i < 3} delay={(i % 3) * 70} />)}
+      {list.map((p, i) => (
+        <ProjectCard project={p} id={i} eager={i < 3} delay={(i % 3) * 70} />
+      ))}
     </div>
   </div>
 </Layout>

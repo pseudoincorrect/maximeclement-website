@@ -1,11 +1,11 @@
 ---
 import '../styles/global.css';
+import ArrowUp from '@lucide/astro/icons/arrow-up';
 import { ClientRouter } from 'astro:transitions';
-import Seo from '../components/Seo.astro';
-import Sidebar from '../components/Sidebar.astro';
 import Footer from '../components/Footer.astro';
 import Lightbox from '../components/Lightbox.astro';
-import ArrowUp from '@lucide/astro/icons/arrow-up';
+import Seo from '../components/Seo.astro';
+import Sidebar from '../components/Sidebar.astro';
 import { SITE } from '../data/site';
 
 interface Props {
@@ -17,8 +17,16 @@ interface Props {
   background?: string;
   jsonLd?: object;
 }
-const { title = SITE.name, description = SITE.description, keywords, image, background, jsonLd } = Astro.props;
+const {
+  title = SITE.name,
+  description = SITE.description,
+  keywords,
+  image,
+  background,
+  jsonLd,
+} = Astro.props;
 ---
+
 <!doctype html>
 <html lang="en" data-theme="dark">
   <head>
@@ -38,29 +46,50 @@ const { title = SITE.name, description = SITE.description, keywords, image, back
       document.documentElement.classList.add('js');
       (function () {
         var t = 'dark';
-        try { t = localStorage.getItem('theme') || 'dark'; } catch (e) {}
+        try {
+          t = localStorage.getItem('theme') || 'dark';
+        } catch (e) {}
         document.documentElement.dataset.theme = t;
       })();
     </script>
     <ClientRouter />
   </head>
   <body class="relative">
-    <a href="#main" class="sr-only z-[100] rounded-lg bg-primary px-4 py-2 font-semibold text-on-primary focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to content</a>
-    <div id="progress" class="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left scale-x-0 bg-gradient-to-r from-primary via-secondary to-accent" aria-hidden="true"></div>
+    <a
+      href="#main"
+      class="sr-only z-[100] rounded-lg bg-primary px-4 py-2 font-semibold text-on-primary focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+    >
+      Skip to content
+    </a>
+    <div
+      id="progress"
+      class="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left scale-x-0 bg-gradient-to-r from-primary via-secondary to-accent"
+      aria-hidden="true"
+    ></div>
     <div class="bg-mesh fixed inset-0 -z-20" aria-hidden="true"></div>
     <div class="bg-grid fixed inset-0 -z-10" aria-hidden="true"></div>
     <Sidebar />
     <div class="relative flex min-h-screen flex-col pt-16 lg:pl-64 lg:pt-0">
       {background && (
-        <div class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-80 overflow-hidden [mask-image:linear-gradient(to_bottom,black,transparent)]" aria-hidden="true">
+        <div
+          class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-80 overflow-hidden [mask-image:linear-gradient(to_bottom,black,transparent)]"
+          aria-hidden="true"
+        >
           <img src={background} alt="" class="size-full object-cover opacity-25" decoding="async" />
         </div>
       )}
-      <main id="main" class="flex-1 px-4 py-10 sm:px-8 lg:py-14"><slot /></main>
+      <main id="main" class="flex-1 px-4 py-10 sm:px-8 lg:py-14">
+        <slot />
+      </main>
       <Footer />
     </div>
-    <button id="back-to-top" data-top type="button" aria-label="Back to top"
-      class="pointer-events-none fixed bottom-6 right-6 z-40 rounded-full bg-primary p-3 text-on-primary opacity-0 shadow-lg shadow-primary/40 transition hover:bg-primary-light">
+    <button
+      id="back-to-top"
+      data-top
+      type="button"
+      aria-label="Back to top"
+      class="pointer-events-none fixed bottom-6 right-6 z-40 rounded-full bg-primary p-3 text-on-primary opacity-0 shadow-lg shadow-primary/40 transition hover:bg-primary-light"
+    >
       <ArrowUp class="size-5" />
     </button>
     <Lightbox />

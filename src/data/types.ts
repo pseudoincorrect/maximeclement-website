@@ -1,4 +1,7 @@
-export interface Picture { path: string; alt: string }
+export interface Picture {
+  path: string;
+  alt: string;
+}
 export interface Project {
   title: string;
   mainPictures: Picture[];

@@ -1,37 +1,65 @@
 ---
-import House from '@lucide/astro/icons/house';
-import Folder from '@lucide/astro/icons/folder';
-import Cpu from '@lucide/astro/icons/cpu';
-import Route from '@lucide/astro/icons/route';
 import Bike from '@lucide/astro/icons/bike';
-import Mail from '@lucide/astro/icons/mail';
+import Cpu from '@lucide/astro/icons/cpu';
 import FileText from '@lucide/astro/icons/file-text';
+import Folder from '@lucide/astro/icons/folder';
+import House from '@lucide/astro/icons/house';
+import Mail from '@lucide/astro/icons/mail';
 import Menu from '@lucide/astro/icons/menu';
-import X from '@lucide/astro/icons/x';
-import Sun from '@lucide/astro/icons/sun';
 import Moon from '@lucide/astro/icons/moon';
+import Route from '@lucide/astro/icons/route';
+import Sun from '@lucide/astro/icons/sun';
+import X from '@lucide/astro/icons/x';
 import { NAV } from '../data/site';
 
-const icons = { home: House, folder: Folder, cpu: Cpu, route: Route, bike: Bike, mail: Mail, file: FileText };
+const icons = {
+  home: House,
+  folder: Folder,
+  cpu: Cpu,
+  route: Route,
+  bike: Bike,
+  mail: Mail,
+  file: FileText,
+};
 const path = Astro.url.pathname;
 const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
+
 <header class="fixed inset-x-0 top-0 z-40 flex h-16 items-center gap-3 border-b border-white/10 bg-bg-paper/70 px-4 backdrop-blur-lg lg:hidden">
-  <button data-nav-open type="button" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false"
-    class="rounded-lg p-2 transition hover:bg-white/10"><Menu class="size-6" /></button>
+  <button
+    data-nav-open
+    type="button"
+    aria-label="Open navigation"
+    aria-controls="sidebar"
+    aria-expanded="false"
+    class="rounded-lg p-2 transition hover:bg-white/10"
+  >
+    <Menu class="size-6" />
+  </button>
   <a href="/" class="flex flex-1 items-center gap-3">
     <img src="/favicon-32x32.png" alt="" width="32" height="32" class="rounded-md" />
     <span class="font-display text-lg font-semibold">IoT Engineer</span>
   </a>
-  <button data-theme-toggle type="button" aria-label="Toggle light/dark theme" class="rounded-lg p-2 transition hover:bg-white/10">
-    <Sun class="size-5 [html[data-theme=light]_&]:hidden" /><Moon class="hidden size-5 [html[data-theme=light]_&]:block" />
+  <button
+    data-theme-toggle
+    type="button"
+    aria-label="Toggle light/dark theme"
+    class="rounded-lg p-2 transition hover:bg-white/10"
+  >
+    <Sun class="size-5 [html[data-theme=light]_&]:hidden" />
+    <Moon class="hidden size-5 [html[data-theme=light]_&]:block" />
   </button>
 </header>
 
-<div id="nav-backdrop" class="fixed inset-0 z-40 hidden bg-black/60 backdrop-blur-sm lg:hidden"></div>
+<div
+  id="nav-backdrop"
+  class="fixed inset-0 z-40 hidden bg-black/60 backdrop-blur-sm lg:hidden"
+></div>
 
-<aside id="sidebar"
-  class="fixed inset-y-0 left-0 z-50 flex w-64 -translate-x-full flex-col border-r border-white/10 bg-bg-paper/85 backdrop-blur-xl transition-transform duration-300 lg:translate-x-0">
+<aside
+  id="sidebar"
+  class="fixed inset-y-0 left-0 z-50 flex w-64 -translate-x-full flex-col border-r border-white/10 bg-bg-paper/85 backdrop-blur-xl transition-transform duration-300 lg:translate-x-0"
+>
   <div class="flex items-center justify-between px-5 pt-5 lg:block lg:pt-8">
     <a href="/" class="flex items-center gap-3">
       <img src="/android-chrome-192x192.png" alt="" width="44" height="44" class="rounded-xl" />
@@ -40,17 +68,36 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
         <span class="block text-sm text-secondary">IoT Engineer</span>
       </span>
     </a>
-    <button data-nav-close type="button" aria-label="Close navigation" class="rounded-lg p-2 hover:bg-white/10 lg:hidden"><X class="size-5" /></button>
+    <button
+      data-nav-close
+      type="button"
+      aria-label="Close navigation"
+      class="rounded-lg p-2 hover:bg-white/10 lg:hidden"
+    >
+      <X class="size-5" />
+    </button>
   </div>
   <nav class="mt-8 flex-1 space-y-1 px-3" aria-label="Main">
     {NAV.map((item) => {
       const Icon = icons[item.icon];
       const active = isActive(item.href);
       return (
-        <a href={item.href} aria-current={active ? 'page' : undefined}
-          class:list={['group flex items-center gap-4 rounded-xl px-4 py-3 text-[0.95rem] font-medium transition',
-            active ? 'bg-primary/20 text-white ring-1 ring-primary/50' : 'text-slate-300 hover:bg-white/5 hover:text-white']}>
-          <Icon class:list={['size-5 transition', active ? 'text-secondary' : 'text-slate-400 group-hover:text-secondary']} />
+        <a
+          href={item.href}
+          aria-current={active ? 'page' : undefined}
+          class:list={[
+            'group flex items-center gap-4 rounded-xl px-4 py-3 text-[0.95rem] font-medium transition',
+            active
+              ? 'bg-primary/20 text-white ring-1 ring-primary/50'
+              : 'text-slate-300 hover:bg-white/5 hover:text-white',
+          ]}
+        >
+          <Icon
+            class:list={[
+              'size-5 transition',
+              active ? 'text-secondary' : 'text-slate-400 group-hover:text-secondary',
+            ]}
+          />
           {item.name}
         </a>
       );
@@ -58,8 +105,14 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
   </nav>
   <div class="flex items-center justify-between px-6 pb-5">
     <p class="text-xs text-slate-500">Doha · Qatar</p>
-    <button data-theme-toggle type="button" aria-label="Toggle light/dark theme" class="hidden rounded-lg p-2 text-slate-300 transition hover:bg-white/10 hover:text-secondary lg:block">
-      <Sun class="size-5 [html[data-theme=light]_&]:hidden" /><Moon class="hidden size-5 [html[data-theme=light]_&]:block" />
+    <button
+      data-theme-toggle
+      type="button"
+      aria-label="Toggle light/dark theme"
+      class="hidden rounded-lg p-2 text-slate-300 transition hover:bg-white/10 hover:text-secondary lg:block"
+    >
+      <Sun class="size-5 [html[data-theme=light]_&]:hidden" />
+      <Moon class="hidden size-5 [html[data-theme=light]_&]:block" />
     </button>
   </div>
 </aside>

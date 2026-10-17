@@ -1,11 +1,19 @@
 ---
 import { SITE } from '../data/site';
-interface Props { title: string; description: string; keywords?: string; image?: string }
+
+interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  image?: string;
+}
 const { title, description, keywords, image = '/images/home/max_pict.jpg' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
 const imageUrl = new URL(image, SITE.url).href;
-const fullTitle = title === SITE.name ? `${SITE.name} | ${SITE.tagline}` : `${title} | ${SITE.name}`;
+const fullTitle =
+  title === SITE.name ? `${SITE.name} | ${SITE.tagline}` : `${title} | ${SITE.name}`;
 ---
+
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
 {keywords && <meta name="keywords" content={keywords} />}

@@ -1,21 +1,33 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import PageTitle from '../components/PageTitle.astro';
 import Briefcase from '@lucide/astro/icons/briefcase';
+import ChevronDown from '@lucide/astro/icons/chevron-down';
 import GraduationCap from '@lucide/astro/icons/graduation-cap';
 import MapPin from '@lucide/astro/icons/map-pin';
-import ChevronDown from '@lucide/astro/icons/chevron-down';
+import PageTitle from '../components/PageTitle.astro';
 import path from '../data/path.json';
 import type { PathItem } from '../data/types';
+import Layout from '../layouts/Layout.astro';
+
 const items = path as PathItem[];
 const COLLAPSE_FROM = 3; // older entries start collapsed
 const year = (r: string) => r.match(/\d{4}/)?.[0] ?? '';
 ---
-<Layout title="Career" description="Previous experience and education of Maxime Clément." keywords="School, diploma, work experience, university, CV, timeline" background="/images/path/background.jpg" image="/images/path/esstin.jpg">
+
+<Layout
+  title="Career"
+  description="Previous experience and education of Maxime Clément."
+  keywords="School, diploma, work experience, university, CV, timeline"
+  background="/images/path/background.jpg"
+  image="/images/path/esstin.jpg"
+>
   <PageTitle eyebrow="Journey" title="Career" subtitle="Work experience and education." />
   <div class="mb-8 flex justify-center gap-6 text-sm text-slate-300" aria-hidden="true">
-    <span class="inline-flex items-center gap-2"><span class="size-3 rounded-full bg-secondary"></span>Work</span>
-    <span class="inline-flex items-center gap-2"><span class="size-3 rounded-full bg-primary"></span>Education</span>
+    <span class="inline-flex items-center gap-2">
+      <span class="size-3 rounded-full bg-secondary"></span>Work
+    </span>
+    <span class="inline-flex items-center gap-2">
+      <span class="size-3 rounded-full bg-primary"></span>Education
+    </span>
   </div>
   <ol class="relative mx-auto max-w-4xl">
     <div class="absolute bottom-0 left-5 top-0 w-0.5 bg-gradient-to-b from-secondary via-primary to-transparent md:left-1/2 md:-translate-x-1/2"></div>
@@ -23,23 +35,70 @@ const year = (r: string) => r.match(/\d{4}/)?.[0] ?? '';
       const work = !it.isSchool;
       return (
         <li class="relative mb-10 pl-14 md:pl-0">
-          <span class:list={['absolute left-0 top-4 z-10 flex size-10 items-center justify-center rounded-full bg-bg-deep ring-2 md:left-1/2 md:-translate-x-1/2', work ? 'text-secondary ring-secondary' : 'text-primary-light ring-primary']}>
+          <span
+            class:list={[
+              'absolute left-0 top-4 z-10 flex size-10 items-center justify-center rounded-full bg-bg-deep ring-2 md:left-1/2 md:-translate-x-1/2',
+              work ? 'text-secondary ring-secondary' : 'text-primary-light ring-primary',
+            ]}
+          >
             {work ? <Briefcase class="size-5" /> : <GraduationCap class="size-5" />}
           </span>
-          <span aria-hidden="true" class:list={['absolute top-3 hidden font-display text-5xl font-bold text-white/10 md:block md:w-[calc(50%-3rem)]', i % 2 === 0 ? 'left-[calc(50%+3rem)]' : 'right-[calc(50%+3rem)] text-right']}>{year(it.dateRange)}</span>
-          <div data-reveal class:list={['md:w-[calc(50%-2.5rem)]', i % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto']}>
-            <article class:list={['timeline-content overflow-hidden rounded-2xl border border-white/10 border-t-4 bg-bg-paper/70 shadow-xl backdrop-blur-md', work ? 'border-t-secondary' : 'border-t-primary']}>
-              <img src={it.picturePath} alt={it.title} loading={i < 2 ? 'eager' : 'lazy'} decoding="async" class="aspect-[5/3] w-full object-cover" />
+          <span
+            aria-hidden="true"
+            class:list={[
+              'absolute top-3 hidden font-display text-5xl font-bold text-white/10 md:block md:w-[calc(50%-3rem)]',
+              i % 2 === 0 ? 'left-[calc(50%+3rem)]' : 'right-[calc(50%+3rem)] text-right',
+            ]}
+          >
+            {year(it.dateRange)}
+          </span>
+          <div
+            data-reveal
+            class:list={['md:w-[calc(50%-2.5rem)]', i % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto']}
+          >
+            <article
+              class:list={[
+                'timeline-content overflow-hidden rounded-2xl border border-white/10 border-t-4 bg-bg-paper/70 shadow-xl backdrop-blur-md',
+                work ? 'border-t-secondary' : 'border-t-primary',
+              ]}
+            >
+              <img
+                src={it.picturePath}
+                alt={it.title}
+                loading={i < 2 ? 'eager' : 'lazy'}
+                decoding="async"
+                class="aspect-[5/3] w-full object-cover"
+              />
               <div class="p-5">
-                <p class:list={['mb-1 text-sm font-semibold', work ? 'text-secondary' : 'text-primary-light']}>{it.dateRange}</p>
+                <p
+                  class:list={[
+                    'mb-1 text-sm font-semibold',
+                    work ? 'text-secondary' : 'text-primary-light',
+                  ]}
+                >
+                  {it.dateRange}
+                </p>
                 <h2 class="text-xl font-bold">{it.title}</h2>
-                <p class="mb-3 mt-1 flex items-start gap-1.5 text-sm text-slate-400"><MapPin class="mt-0.5 size-4 shrink-0" />{it.location}</p>
+                <p class="mb-3 mt-1 flex items-start gap-1.5 text-sm text-slate-400">
+                  <MapPin class="mt-0.5 size-4 shrink-0" />
+                  {it.location}
+                </p>
                 {i < COLLAPSE_FROM ? (
-                  <ul class="space-y-2 text-sm leading-relaxed text-slate-300">{it.keyPoints.map((k) => <li set:html={k} />)}</ul>
+                  <ul class="space-y-2 text-sm leading-relaxed text-slate-300">
+                    {it.keyPoints.map((k) => (
+                      <li set:html={k} />
+                    ))}
+                  </ul>
                 ) : (
                   <details class="group">
-                    <summary class="flex cursor-pointer list-none items-center gap-1 text-sm font-semibold text-secondary [&::-webkit-details-marker]:hidden">Show details <ChevronDown class="size-4 transition group-open:rotate-180" /></summary>
-                    <ul class="mt-3 space-y-2 text-sm leading-relaxed text-slate-300">{it.keyPoints.map((k) => <li set:html={k} />)}</ul>
+                    <summary class="flex cursor-pointer list-none items-center gap-1 text-sm font-semibold text-secondary [&::-webkit-details-marker]:hidden">
+                      Show details <ChevronDown class="size-4 transition group-open:rotate-180" />
+                    </summary>
+                    <ul class="mt-3 space-y-2 text-sm leading-relaxed text-slate-300">
+                      {it.keyPoints.map((k) => (
+                        <li set:html={k} />
+                      ))}
+                    </ul>
                   </details>
                 )}
               </div>
