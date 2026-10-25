@@ -23,6 +23,9 @@
   --color-accent-warm: #e09f3e;
   --color-on-primary: #ffffff;
   --color-ink: #f8fafc;
+  /* Chart series, validated for contrast and colour-blind separation */
+  --color-chart-iot: #14a89a;
+  --color-chart-data: #7286e8;
 }
 
 /* ---------- Light theme: same palette, tuned for contrast ---------- */
@@ -38,6 +41,8 @@ html[data-theme='light'] {
   --color-secondary-dark: #14857b;
   --color-accent: #a85f00;
   --color-ink: #161a2e;
+  --color-chart-iot: #008f82;
+  --color-chart-data: #4459c4;
   --color-white: #161a2e;
   --color-black: #ffffff;
   --color-slate-100: #1b2036;

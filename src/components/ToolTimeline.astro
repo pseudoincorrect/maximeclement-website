@@ -1,0 +1,86 @@
+---
+// Horizontal timeline: one bar per tool, split in two colours at the IoT -> data switch
+interface Props {
+  tools: { name: string; from: number; to?: number }[];
+  start: number;
+  switchYear: number;
+  class?: string;
+}
+const { tools, start, switchYear, class: cls = '' } = Astro.props;
+
+const now = new Date();
+const thisYear = now.getFullYear();
+const end = thisYear + now.getMonth() / 12;
+const pct = (y: number) => ((y - start) / (end - start)) * 100;
+const ticks = Array.from(
+  { length: Math.floor((thisYear - start) / 2) + 1 },
+  (_, i) => start + i * 2,
+);
+
+const rows = tools.map((t) => {
+  const to = t.to ?? end;
+  const segments = [
+    { from: t.from, to: Math.min(to, switchYear), era: 'iot' },
+    { from: Math.max(t.from, switchYear), to, era: 'data' },
+  ].filter((s) => s.to > s.from);
+  const range = `${t.from} – ${t.to ?? 'today'}`;
+  return { ...t, segments, range };
+});
+// Track column width, shared by the rows and the grid overlay
+const label = 'grid-cols-[6.5rem_1fr] sm:grid-cols-[8.5rem_1fr]';
+---
+
+<figure class:list={['relative', cls]}>
+  <div
+    class="pointer-events-none absolute inset-y-0 left-[7.25rem] right-0 sm:left-[9.25rem]"
+    aria-hidden="true"
+  >
+    {ticks.map((y) => (
+      <span class="absolute inset-y-0 w-px bg-white/5" style={`left:${pct(y)}%`} />
+    ))}
+    <span
+      class="absolute inset-y-0 border-l border-dashed border-accent/70"
+      style={`left:${pct(switchYear)}%`}
+    ></span>
+  </div>
+  <ul class="relative space-y-3">
+    {rows.map((r) => (
+      <li class:list={['group grid items-center gap-3', label]}>
+        <div>
+          <span class="block text-sm font-semibold leading-tight">{r.name}</span>
+          <span class="block text-xs text-slate-400">{r.range}</span>
+        </div>
+        <div class="relative h-3 rounded-full bg-white/5">
+          {r.segments.map((s, i) => (
+            <span
+              class:list={[
+                'absolute inset-y-0 rounded-[4px] transition-opacity group-hover:opacity-80',
+                s.era === 'iot' ? 'bg-chart-iot' : 'bg-chart-data',
+              ]}
+              style={`left:calc(${pct(s.from)}% + ${i ? 2 : 0}px);width:calc(${pct(s.to) - pct(s.from)}% - ${i ? 2 : 0}px)`}
+            />
+          ))}
+        </div>
+      </li>
+    ))}
+  </ul>
+  <div class:list={['relative mt-3 grid gap-3 text-xs text-slate-400', label]} aria-hidden="true">
+    <span></span>
+    <div class="relative h-4">
+      {ticks.map((y, i) => (
+        <span
+          class:list={[
+            '-translate-x-1/2 absolute',
+            y === switchYear ? 'font-semibold text-accent' : i % 2 && 'hidden sm:inline',
+          ]}
+          style={`left:${pct(y)}%`}
+        >
+          {y}
+        </span>
+      ))}
+    </div>
+  </div>
+  <figcaption class="sr-only">
+    Years of use per tool: {rows.map((r) => `${r.name} ${r.range}`).join(', ')}.
+  </figcaption>
+</figure>

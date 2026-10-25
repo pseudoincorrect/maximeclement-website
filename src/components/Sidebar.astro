@@ -10,7 +10,7 @@ import Moon from '@lucide/astro/icons/moon';
 import Route from '@lucide/astro/icons/route';
 import Sun from '@lucide/astro/icons/sun';
 import X from '@lucide/astro/icons/x';
-import { NAV } from '../data/site';
+import { NAV, SITE } from '../data/site';
 
 const icons = {
   home: House,
@@ -38,7 +38,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
   </button>
   <a href="/" class="flex flex-1 items-center gap-3">
     <img src="/favicon-32x32.png" alt="" width="32" height="32" class="rounded-md" />
-    <span class="font-display text-lg font-semibold">IoT Engineer</span>
+    <span class="font-display text-lg font-semibold">{SITE.tagline}</span>
   </a>
   <button
     data-theme-toggle
@@ -65,7 +65,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
       <img src="/android-chrome-192x192.png" alt="" width="44" height="44" class="rounded-xl" />
       <span class="leading-tight">
         <span class="block font-display text-lg font-bold">Maxime Clément</span>
-        <span class="block text-sm text-secondary">IoT Engineer</span>
+        <span class="block text-sm text-secondary">{SITE.tagline}</span>
       </span>
     </a>
     <button
@@ -104,7 +104,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWit
     })}
   </nav>
   <div class="flex items-center justify-between px-6 pb-5">
-    <p class="text-xs text-slate-500">Doha · Qatar</p>
+    <p class="text-xs text-slate-500">Luxembourg</p>
     <button
       data-theme-toggle
       type="button"
