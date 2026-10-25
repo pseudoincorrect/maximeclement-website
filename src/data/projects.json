@@ -24,7 +24,7 @@
     "details": "Technologies used in Bariot: <ul> <li> Transport: <b> MQTT </b> </li> <li> Authentication/Authorization: <b> JWT </b> </li> <li> USER, THINGS storage: <b> PostgreSQL </b> </li> <li> THINGS DATA storage: <b> InfluxDB </b> </li> <li> Services intercommunication: <b> gRpc </b> </li> <li> Services messaging: <b> Nats </b> </li> </ul> Technologies being added: <ul> <li> Transport: <b> OPC-UA </b> </li> <li> Data presentation: <b> Grafana </b> </li> <li> Reverse proxy: <b> Nginx </b> </li> <li> Secret storage/management: <b> Vault </b> </li> <li> Caching: <b> Redis </b> </li> <li> CI/CD: <b> GitLab </b> </li> </ul> </p> Bariot is opinionated, in the sense that storage and communications technologies are predefined (for now)",
     "tags": ["IoT", "IIoT", "Online platform", "Microservices", "Docker", "Go"],
     "location": "HBKU, Doha, Qatar",
-    "date": "2022 - Present"
+    "date": "2022 - 2023"
   },
   {
     "title": "LoRaWAN Health V2",
