@@ -219,20 +219,6 @@ html.js [data-reveal].is-visible {
   transform: none;
 }
 
-/* Skill bars */
-.skill-bar > i {
-  display: block;
-  height: 100%;
-  width: 0;
-  border-radius: inherit;
-  transition: width 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-}
-.skill-bar.is-visible > i,
-html:not(.js) .skill-bar > i {
-  width: var(--w);
-}
-
 /* Magnetic buttons */
 [data-magnetic] {
   transition:

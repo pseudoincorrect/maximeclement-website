@@ -1,9 +1,23 @@
 [
   {
     "isSchool": false,
+    "title": "Data Engineer",
+    "location": "Tadaweb, Luxembourg",
+    "dateRange": "2022 - Present",
+    "picturePath": "/images/path/tadaweb.jpg",
+    "colorBg": "rgba(0, 255, 255, 0.1)",
+    "colorFg": "#FFF",
+    "keyPoints": [
+      "Joined as a <b>Data Engineer</b> in 2022, after 8 years in IoT",
+      "Development and maintenance of a <b>datalake</b> with <b>data processing</b> pipelines feeding it (medium scale)",
+      "<b>Microservices</b> in Go and TypeScript (NestJS), backed by <b>PostgreSQL, MongoDB, Spanner and BigQuery</b>"
+    ]
+  },
+  {
+    "isSchool": false,
     "title": "IoT Engineer, Lab Manager",
     "location": "HBKU University, Doha, Qatar",
-    "dateRange": "2016 - Present",
+    "dateRange": "2016 - 2022",
     "picturePath": "/images/path/hbku.jpg",
     "colorBg": "rgba(0, 255, 255, 0.1)",
     "colorFg": "#FFF",

@@ -1,31 +1,84 @@
 ---
 import Card from '../components/Card.astro';
-import Carousel from '../components/Carousel.astro';
+import Hl from '../components/Hl.astro';
 import PageTitle from '../components/PageTitle.astro';
+import { SITE } from '../data/site';
 import Layout from '../layouts/Layout.astro';
 
-const images = [
-  { path: '/images/leisures/guitar.jpg', alt: 'Guitar' },
-  { path: '/images/leisures/MTB.jpg', alt: 'Mountain biking' },
-  { path: '/images/leisures/travelling.jpg', alt: 'Travelling' },
-  { path: '/images/leisures/reading.jpg', alt: 'Reading' },
-  { path: '/images/leisures/healthy.jpeg', alt: 'Healthy living' },
-  { path: '/images/leisures/hangout.jpg', alt: 'Hanging out with friends' },
+const hobbies = [
+  { path: '/images/leisures/guitar.jpg', alt: 'Guitar', caption: 'Playing some guitar' },
+  { path: '/images/leisures/MTB.jpg', alt: 'Mountain biking', caption: 'Mountain biking' },
+  { path: '/images/leisures/travelling.jpg', alt: 'Travelling', caption: 'Travelling' },
+  { path: '/images/leisures/reading.jpg', alt: 'Reading', caption: 'Reading' },
+  { path: '/images/leisures/healthy.jpeg', alt: 'Healthy living', caption: 'Eating healthy' },
+  {
+    path: '/images/leisures/hangout.jpg',
+    alt: 'Hanging out with friends',
+    caption: 'Good company',
+  },
 ];
+const tools = ['Neovim', 'zsh', 'lazygit', 'herdr', 'pi (coding agent)'];
+const link = 'font-semibold text-secondary underline underline-offset-4 hover:text-secondary-light';
 ---
 
 <Layout
   title="Outside Work"
   description="What Maxime Clément does outside work."
-  keywords="Leisure, sport, holidays, lifestyle, music"
+  keywords="Leisure, sport, holidays, lifestyle, music, programming environment, Neovim"
   background="/images/leisures/background.jpg"
 >
   <PageTitle
     eyebrow="Off the clock"
-    title="Let the images speak"
-    subtitle="Music, biking, travelling, reading and good company."
+    title="Outside work"
+    subtitle="Music, biking, travelling, reading, good company... and a bit more code."
   />
-  <Card tone="secondary" class="mx-auto max-w-2xl p-4 sm:p-6">
-    <Carousel images={images} height="h-72 sm:h-96" />
-  </Card>
+  <div class="mx-auto flex max-w-5xl flex-col gap-10">
+    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" data-gallery>
+      {hobbies.map((h, i) => (
+        <li>
+          <Card tone="secondary" delay={i * 60} class="h-full overflow-hidden">
+            <img
+              src={h.path}
+              alt={h.alt}
+              loading={i < 3 ? 'eager' : 'lazy'}
+              decoding="async"
+              data-lightbox
+              class="aspect-[4/3] w-full cursor-zoom-in object-cover"
+            />
+            <p class="px-5 py-4 font-display font-bold">{h.caption}</p>
+          </Card>
+        </li>
+      ))}
+    </ul>
+
+    <div class="grid gap-6 lg:grid-cols-2">
+      <Card tone="primary" class="p-6 sm:p-8">
+        <h2 class="mb-4 text-2xl font-bold">Tinkering with my setup</h2>
+        <p class="text-slate-300">
+          I like <Hl>tweaking my programming environment</Hl>. Every now and then I try a new tool,
+          a different workflow, or rewrite half of my config... just to see if it works better. Most
+          of the time it does, sometimes I go back. Current setup:
+        </p>
+        <ul class="mt-5 flex flex-wrap gap-2" aria-label="Current tools">
+          {tools.map((t) => (
+            <li class="rounded-lg bg-white/5 px-3 py-1.5 text-sm text-slate-200 ring-1 ring-white/10">
+              {t}
+            </li>
+          ))}
+        </ul>
+      </Card>
+      <Card tone="primary" class="p-6 sm:p-8">
+        <h2 class="mb-4 text-2xl font-bold">Brain workouts</h2>
+        <p class="text-slate-300">
+          I enjoy playing with AI, and I use it a lot. That is exactly why I keep some code for
+          myself:{' '}
+          <a class={link} href={SITE.socials.codewars} target="_blank" rel="noopener noreferrer">
+            katas on Codewars
+          </a>{' '}
+          and small <Hl>side projects written by hand</Hl>. Like biking, if I stop for too long, the
+          next climb hurts.
+        </p>
+      </Card>
+    </div>
+  </div>
 </Layout>

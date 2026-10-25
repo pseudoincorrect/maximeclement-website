@@ -1,62 +1,66 @@
 ---
-import ChevronDown from '@lucide/astro/icons/chevron-down';
+import Cpu from '@lucide/astro/icons/cpu';
+import Database from '@lucide/astro/icons/database';
 import Card from '../components/Card.astro';
 import PageTitle from '../components/PageTitle.astro';
-import PieChart from '../components/PieChart.astro';
-import RadarChart from '../components/RadarChart.astro';
 import Layout from '../layouts/Layout.astro';
 
-const pie = [
-  { name: 'Frontend', value: 200, color: '#e09f3e' },
-  { name: 'Backend', value: 400, color: '#335c67' },
-  { name: 'Hard/Firmware', value: 300, color: '#9e2a2b' },
-  { name: 'Project Mgmt', value: 200, color: '#540b0e' },
-];
-const radar = [
-  { label: 'TypeScript & JS', value: 95 },
-  { label: 'Python', value: 85 },
-  { label: 'C', value: 95 },
-  { label: 'HTML/CSS', value: 85 },
-  { label: 'Go', value: 85 },
-  { label: 'Dart', value: 90 },
-  { label: 'Bash', value: 75 },
-];
-
-type Group = { title: string; items: (string | { title: string; items: string[] })[] };
-const expertise: Group[] = [
+type Group = { title: string; items: string[] };
+const data: Group[] = [
+  { title: 'Languages', items: ['Go', 'TypeScript', 'Python', 'SQL'] },
   {
-    title: 'Backend',
+    title: 'Databases',
+    items: ['PostgreSQL', 'MongoDB', 'Spanner', 'BigQuery'],
+  },
+  {
+    title: 'Architecture',
+    items: ['Datalake', 'Data processing pipelines', 'Microservices'],
+  },
+  { title: 'Frameworks and APIs', items: ['NestJS', 'REST', 'gRPC'] },
+  { title: 'Cloud and infrastructure', items: ['GCP', 'Docker', 'CI/CD'] },
+];
+const iot: Group[] = [
+  { title: 'Languages', items: ['C', 'TypeScript', 'Go', 'Python', 'Dart', 'Bash'] },
+  {
+    title: 'Cloud',
     items: [
-      'SQL & NoSQL databases',
-      'Serverless cloud architecture',
-      'Container architecture',
-      'Event-driven and message-queuing architecture',
-      'Parallel processing',
-      'Continuous integration / delivery and TDD',
-      'Infrastructure as code',
-      'Cybersecurity (IoT standards)',
+      'AWS serverless with the CDK',
+      'DynamoDB',
+      'Time-series databases (InfluxDB, Timestream)',
+      'GitLab CI, AWS CodePipeline',
     ],
   },
   {
-    title: 'Frontend',
+    title: 'Web and mobile',
+    items: ['React / Next.js / Astro', 'Flutter', 'Angular (less often)'],
+  },
+  {
+    title: 'Microcontrollers and boards',
     items: [
-      'Web and mobile applications',
-      '(Near) real-time data applications',
-      'Dynamic websites',
-      'Familiar with UX design patterns',
+      'Nordic Semiconductor (Bluetooth, Thread)',
+      'ST Microelectronics',
+      'STM/Murata (LoRaWAN)',
+      'ESP32 and Texas Instruments (Wi-Fi)',
+      'Raspberry Pi, Odroid',
+      'Intel FPGA + Quartus',
     ],
   },
   {
-    title: 'Hardware and Firmware',
+    title: 'Firmware',
     items: [
-      'Microcontroller programming',
-      'Wireless protocols (Bluetooth, Wi-Fi, LoRaWAN, Thread, ...)',
-      'Low-power and ultra-low-power applications',
+      'Wireless protocols (BLE, Wi-Fi, LoRaWAN, Thread)',
+      'Low-power and ultra-low-power',
       'Digital signal processing',
-      'Printed circuit board (PCB) design',
-      'Prototyping',
+      'Ceedling (Unity + CMock)',
+      'Keil, Segger, Code Composer Studio',
     ],
   },
+  {
+    title: 'Hardware',
+    items: ['PCB design: Altium, Eagle', 'CAD: Fusion 360, SolidWorks', 'Prototyping'],
+  },
+];
+const shared: Group[] = [
   {
     title: 'Project Management',
     items: [
@@ -66,8 +70,6 @@ const expertise: Group[] = [
       'Report writing',
     ],
   },
-];
-const soft: Group[] = [
   {
     title: 'Instructing',
     items: [
@@ -80,75 +82,28 @@ const soft: Group[] = [
     title: 'Teamwork',
     items: ['Comfortable working in a team', 'Code reviews', "Well... I don't like to eat alone"],
   },
-];
-const frameworks: Group[] = [
   {
-    title: 'Backend',
-    items: [
-      'Microservices with Docker',
-      'AWS serverless with the CDK framework',
-      'SQL and NoSQL databases (PostgreSQL, DynamoDB, MongoDB...)',
-      'Time-series databases (InfluxDB, Timestream)',
-      'REST API, gRPC API (Express and Go)',
-      'Node.js JavaScript runtime or Go',
-      'Quite a few other backend technologies/frameworks',
-    ],
-  },
-  {
-    title: 'Frontend',
-    items: ['React / Next.js / Astro', 'Flutter (mobile apps)', 'Angular (less often)'],
-  },
-  {
-    title: 'Embedded Systems',
-    items: [
-      {
-        title: 'Microcontrollers',
-        items: [
-          'ST Microelectronics (regular MCU)',
-          'Nordic Semiconductor (Bluetooth and Thread)',
-          'STM/Murata (LoRaWAN)',
-          'ESP32 (Wi-Fi)',
-          'Texas Instruments (Wi-Fi)',
-        ],
-      },
-      { title: 'Single-board computers', items: ['Odroid', 'Raspberry Pi'] },
-      { title: 'FPGAs', items: ['Intel FPGA + Quartus / ModelSim / Nios'] },
-    ],
-  },
-  { title: 'PCB Design (EDA)', items: ['Altium Designer', 'Eagle (Autodesk, CadSoft)'] },
-  {
-    title: 'Testing and CI/CD',
-    items: [
-      'C: Ceedling (Unity + CMock + CException)',
-      'JavaScript: Jest, Jasmine, Karma',
-      'GitLab, AWS CodePipeline',
-    ],
-  },
-  {
-    title: 'Compiling and Programming Tooling',
-    items: [
-      'VS Code + GCC + vendor flashing/debug tools',
-      'Keil, Segger Embedded Studio, Code Composer Studio',
-      'Many other proprietary IDEs',
-      'Ask me about it',
-    ],
-  },
-  { title: 'Versioning and Collaborative Software', items: ['Git'] },
-  { title: 'Computer-Aided Design (CAD)', items: ['Fusion 360', 'SolidWorks'] },
-  {
-    title: 'Operating Systems',
-    items: [
-      'Linux distros, RPM and Debian',
-      'macOS (my pick for web development)',
-      'Windows (my pick for embedded systems development)',
-      'Comfortable with a terminal',
-    ],
+    title: 'Everyday tools',
+    items: ['Git', 'Linux and macOS', 'Neovim', 'Comfortable with a terminal'],
   },
 ];
-const panels = [
-  { title: 'Areas of Expertise (details)', groups: expertise, wide: false },
-  { title: 'Soft Skills', groups: soft, wide: false },
-  { title: 'Frameworks & Tools', groups: frameworks, wide: true },
+const columns = [
+  {
+    icon: Database,
+    title: 'Data engineering',
+    dates: '2022 – today',
+    note: 'What I work with every day.',
+    groups: data,
+    tone: 'primary' as const,
+  },
+  {
+    icon: Cpu,
+    title: 'IoT engineering',
+    dates: '2014 – 2022',
+    note: 'What I used to build connected devices, end to end.',
+    groups: iot,
+    tone: 'secondary' as const,
+  },
 ];
 const chip =
   'rounded-lg bg-white/5 px-3 py-1.5 text-sm text-slate-200 ring-1 ring-white/10 transition hover:bg-secondary/10 hover:ring-secondary/50';
@@ -156,93 +111,57 @@ const chip =
 
 <Layout
   title="Skills"
-  description="Skills and expertise of Maxime Clément."
-  keywords="Programming languages, frameworks, expertise, software development, cloud applications"
+  description="Skills of Maxime Clément, in data engineering and IoT engineering."
+  keywords="Data engineering, Go, PostgreSQL, MongoDB, Spanner, BigQuery, IoT, embedded systems"
   background="/images/skills/background.jpg"
-  image="/images/home/iot_diagram.jpg"
 >
   <PageTitle
     eyebrow="Expertise"
     title="Skills"
-    subtitle="What I work with, and how comfortable I am with it."
+    subtitle="Two sets: the data engineering I do now, and the IoT engineering I did before."
   />
   <div class="mx-auto grid max-w-6xl gap-6 lg:grid-cols-2">
-    <Card tone="primary" class="p-6">
-      <h2 class="mb-4 text-center text-2xl font-bold">Areas of Expertise</h2>
-      <PieChart data={pie} />
-    </Card>
-    <Card tone="primary" class="p-6">
-      <h2 class="mb-4 text-center text-2xl font-bold">Coding Skills</h2>
-      <RadarChart data={radar} />
-    </Card>
-    <Card tone="secondary" class="p-6 lg:col-span-2">
-      <h2 class="mb-5 text-center text-2xl font-bold">Languages, in numbers</h2>
-      <ul class="grid gap-x-10 gap-y-4 sm:grid-cols-2">
-        {[...radar]
-          .sort((a, b) => b.value - a.value)
-          .map((r) => (
-            <li>
-              <div class="mb-1 flex justify-between text-sm">
-                <span class="font-medium">{r.label}</span>
-                <span class="text-slate-400">{r.value}%</span>
-              </div>
-              <div
-                class="skill-bar h-2 rounded-full bg-white/10"
-                style={`--w:${r.value}%`}
-                role="progressbar"
-                aria-label={r.label}
-                aria-valuenow={r.value}
-                aria-valuemin="0"
-                aria-valuemax="100"
-              >
-                <i></i>
-              </div>
-            </li>
-          ))}
-      </ul>
-    </Card>
-    {panels.map((p) => (
-      <Card tone="primary" class:list={['p-6', p.wide && 'lg:col-span-2']}>
-        <h2 class="mb-4 border-b border-white/10 pb-3 text-center text-2xl font-bold">{p.title}</h2>
-        <div class:list={['space-y-3', p.wide && 'lg:columns-2 lg:gap-6 lg:space-y-0']}>
-          {p.groups.map((g, gi) => (
-            <details
-              open={gi < 2 || !p.wide}
-              class="group break-inside-avoid rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 lg:mb-3"
-            >
-              <summary class="flex cursor-pointer list-none items-center justify-between font-display text-lg font-bold text-accent [&::-webkit-details-marker]:hidden">
+    {columns.map((c) => (
+      <Card tone={c.tone} class="p-6">
+        <header class="mb-5 border-b border-white/10 pb-4">
+          <p class="mb-1 inline-flex items-center gap-2 text-sm font-semibold text-secondary">
+            <c.icon class="size-4" /> {c.dates}
+          </p>
+          <h2 class="text-2xl font-bold">{c.title}</h2>
+          <p class="mt-1 text-sm text-slate-400">{c.note}</p>
+        </header>
+        <div class="space-y-5">
+          {c.groups.map((g) => (
+            <section>
+              <h3 class="mb-2 text-sm font-semibold uppercase tracking-wider text-accent">
                 {g.title}
-                <ChevronDown class="size-5 text-slate-400 transition group-open:rotate-180" />
-              </summary>
-              <div class="mt-3 space-y-3">
-                {g.items.some((it) => typeof it === 'string') && (
-                  <ul class="flex flex-wrap gap-2">
-                    {g.items
-                      .filter((it) => typeof it === 'string')
-                      .map((it) => (
-                        <li class={chip}>{it}</li>
-                      ))}
-                  </ul>
-                )}
-                {g.items
-                  .filter((it) => typeof it !== 'string')
-                  .map((it: any) => (
-                    <div>
-                      <h4 class="mb-1.5 text-sm font-semibold uppercase tracking-wider text-secondary">
-                        {it.title}
-                      </h4>
-                      <ul class="flex flex-wrap gap-2">
-                        {it.items.map((s: string) => (
-                          <li class={chip}>{s}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-              </div>
-            </details>
+              </h3>
+              <ul class="flex flex-wrap gap-2">
+                {g.items.map((it) => (
+                  <li class={chip}>{it}</li>
+                ))}
+              </ul>
+            </section>
           ))}
         </div>
       </Card>
     ))}
+    <Card tone="neutral" class="p-6 lg:col-span-2">
+      <h2 class="mb-5 border-b border-white/10 pb-4 text-2xl font-bold">Whatever the field</h2>
+      <div class="grid gap-5 sm:grid-cols-2">
+        {shared.map((g) => (
+          <section>
+            <h3 class="mb-2 text-sm font-semibold uppercase tracking-wider text-accent">
+              {g.title}
+            </h3>
+            <ul class="flex flex-wrap gap-2">
+              {g.items.map((it) => (
+                <li class={chip}>{it}</li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+    </Card>
   </div>
 </Layout>

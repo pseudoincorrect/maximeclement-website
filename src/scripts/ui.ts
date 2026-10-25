@@ -120,6 +120,16 @@ document.addEventListener('click', async (e) => {
     }
   }
 
+  // Standalone images (outside a carousel) are grouped by their [data-gallery] parent
+  const img = t.closest<HTMLImageElement>('img[data-lightbox]');
+  if (img) {
+    lbImages = $$<HTMLImageElement>(
+      'img[data-lightbox]',
+      img.closest('[data-gallery]') ?? document,
+    );
+    return showLightbox(lbImages.indexOf(img));
+  }
+
   if (t.closest('[data-lb-close]') || t.id === 'lightbox')
     return $<HTMLDialogElement>('#lightbox')?.close();
   if (t.closest('[data-lb-prev]')) return showLightbox(lbIndex - 1);
@@ -220,7 +230,7 @@ function init() {
     },
     { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
   );
-  $$('[data-reveal], .skill-bar').forEach((el) => io!.observe(el));
+  $$('[data-reveal]').forEach((el) => io!.observe(el));
 
   tocIo?.disconnect();
   const links = $$<HTMLAnchorElement>('[data-toc] a');
